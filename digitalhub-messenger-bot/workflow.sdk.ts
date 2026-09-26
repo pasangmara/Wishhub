@@ -287,6 +287,7 @@ const saveLead = tool({
           { id: 'Stage', displayName: 'Stage', required: false, defaultMatch: false, display: true, type: 'string', canBeUsedToMatch: true },
           { id: 'Needs Human', displayName: 'Needs Human', required: false, defaultMatch: false, display: true, type: 'string', canBeUsedToMatch: true },
           { id: 'Conversation Summary', displayName: 'Conversation Summary', required: false, defaultMatch: false, display: true, type: 'string', canBeUsedToMatch: true },
+          { id: 'Hot Alert Sent', displayName: 'Hot Alert Sent', required: false, defaultMatch: false, display: true, type: 'string', canBeUsedToMatch: true, removed: true },
           { id: 'Assigned To', displayName: 'Assigned To', required: false, defaultMatch: false, display: true, type: 'string', canBeUsedToMatch: true, removed: true },
           { id: 'Notes', displayName: 'Notes', required: false, defaultMatch: false, display: true, type: 'string', canBeUsedToMatch: true, removed: true }
         ]
@@ -317,6 +318,109 @@ const salesAgent = node({
   output: [{ output: 'Assalamu Alaikum! DigitalHub e apnake shagotom. Apni kon service er price jante chan?' }]
 });
 
+const lookUpLead = node({
+  type: 'n8n-nodes-base.googleSheets',
+  version: 4.7,
+  config: {
+    name: 'Look Up Lead',
+    alwaysOutputData: true,
+    parameters: {
+      resource: 'sheet',
+      operation: 'read',
+      documentId: { __rl: true, mode: 'list', value: '', cachedResultName: 'DigitalHub Chatbot' },
+      sheetName: { __rl: true, mode: 'name', value: 'Leads' },
+      filtersUI: { values: [{ lookupColumn: 'Lead ID', lookupValue: expr('{{ $("Prepare Input").item.json.sessionId }}') }] },
+      options: { returnFirstMatch: true }
+    },
+    credentials: { googleSheetsOAuth2Api: newCredential('Google Sheets') },
+    position: [1120, 400]
+  },
+  output: [{ 'Lead ID': '24567890123456', 'Name': 'Rahim', 'Phone': '01711000000', 'Lead Status': 'Hot', 'Hot Alert Sent': '' }]
+});
+
+const isNewHotLead = ifElse({
+  version: 2.3,
+  config: {
+    name: 'New Hot Lead?',
+    parameters: {
+      conditions: {
+        options: { caseSensitive: false, leftValue: '', typeValidation: 'loose', version: 2 },
+        conditions: [
+          { leftValue: expr('{{ $json["Lead Status"] }}'), operator: { type: 'string', operation: 'equals' }, rightValue: 'Hot' },
+          { leftValue: expr('{{ $json["Hot Alert Sent"] }}'), operator: { type: 'string', operation: 'notEquals' }, rightValue: 'Yes' }
+        ],
+        combinator: 'and'
+      },
+      looseTypeValidation: true
+    },
+    position: [1360, 400]
+  }
+});
+
+const emailHotLead = node({
+  type: 'n8n-nodes-base.gmail',
+  version: 2.2,
+  config: {
+    name: 'Email Hot Lead to Team',
+    parameters: {
+      resource: 'message',
+      operation: 'send',
+      sendTo: 'vingobd@gmail.com',
+      subject: expr('{{ "🔥 Hot lead: " + ($json["Name"] || "New customer") + " – " + ($json["Service Interested"] || "DigitalHub") }}'),
+      emailType: 'html',
+      message: expr(
+        '<h2 style="margin:0 0 12px">🔥 New HOT lead from Messenger</h2>\n' +
+        '<table cellpadding="6" style="border-collapse:collapse;font-family:Arial,sans-serif;font-size:14px">\n' +
+        '<tr><td><b>Name</b></td><td>{{ $json["Name"] || "-" }}</td></tr>\n' +
+        '<tr><td><b>Phone / WhatsApp</b></td><td>{{ $json["Phone"] || "-" }}</td></tr>\n' +
+        '<tr><td><b>Email</b></td><td>{{ $json["Email"] || "-" }}</td></tr>\n' +
+        '<tr><td><b>Business</b></td><td>{{ $json["Business"] || "-" }}</td></tr>\n' +
+        '<tr><td><b>Page / Website</b></td><td>{{ $json["Page or Website"] || "-" }}</td></tr>\n' +
+        '<tr><td><b>Service</b></td><td>{{ $json["Service Interested"] || "-" }}</td></tr>\n' +
+        '<tr><td><b>Budget</b></td><td>{{ $json["Budget"] || "-" }}</td></tr>\n' +
+        '<tr><td><b>Timeline</b></td><td>{{ $json["Timeline"] || "-" }}</td></tr>\n' +
+        '<tr><td><b>Stage</b></td><td>{{ $json["Stage"] || "-" }}</td></tr>\n' +
+        '<tr><td><b>Needs human</b></td><td>{{ $json["Needs Human"] || "-" }}</td></tr>\n' +
+        '</table>\n' +
+        '<p><b>Summary:</b> {{ $json["Conversation Summary"] || "-" }}</p>\n' +
+        '<p>Last message: "{{ $("Prepare Input").item.json.text }}"<br>Lead ID: {{ $json["Lead ID"] }} · Channel: {{ $json["Channel"] }} · {{ $json["Last Updated"] }}</p>\n' +
+        '<p>Reply fast: open the Page inbox → <a href="https://business.facebook.com/latest/inbox">Meta Business Suite Inbox</a></p>'
+      ),
+      options: { appendAttribution: false, senderName: 'DigitalHub Bot' }
+    },
+    credentials: { gmailOAuth2: newCredential('Gmail') },
+    position: [1600, 280]
+  },
+  output: [{ id: '18c0a1b2c3d4', threadId: '18c0a1b2c3d4' }]
+});
+
+const markAlertSent = node({
+  type: 'n8n-nodes-base.googleSheets',
+  version: 4.7,
+  config: {
+    name: 'Mark Hot Alert Sent',
+    parameters: {
+      resource: 'sheet',
+      operation: 'update',
+      documentId: { __rl: true, mode: 'list', value: '', cachedResultName: 'DigitalHub Chatbot' },
+      sheetName: { __rl: true, mode: 'name', value: 'Leads' },
+      columns: {
+        mappingMode: 'defineBelow',
+        matchingColumns: ['Lead ID'],
+        value: { 'Lead ID': expr('{{ $("Prepare Input").item.json.sessionId }}'), 'Hot Alert Sent': 'Yes' },
+        schema: [
+          { id: 'Lead ID', displayName: 'Lead ID', required: false, defaultMatch: false, display: true, type: 'string', canBeUsedToMatch: true },
+          { id: 'Hot Alert Sent', displayName: 'Hot Alert Sent', required: false, defaultMatch: false, display: true, type: 'string', canBeUsedToMatch: true }
+        ]
+      },
+      options: {}
+    },
+    credentials: { googleSheetsOAuth2Api: newCredential('Google Sheets') },
+    position: [1840, 280]
+  },
+  output: [{ 'Lead ID': '24567890123456', 'Hot Alert Sent': 'Yes' }]
+});
+
 const isMessenger = ifElse({
   version: 2.3,
   config: {
@@ -328,7 +432,7 @@ const isMessenger = ifElse({
         combinator: 'and'
       }
     },
-    position: [1200, 400]
+    position: [2060, 400]
   }
 });
 
@@ -345,11 +449,11 @@ const sendToMessenger = node({
       sendBody: true,
       contentType: 'json',
       specifyBody: 'json',
-      jsonBody: expr('{{ JSON.stringify({ recipient: { id: $("Prepare Input").item.json.sessionId }, messaging_type: "RESPONSE", message: { text: String($json.output || "").slice(0, 1990) } }) }}'),
+      jsonBody: expr('{{ JSON.stringify({ recipient: { id: $("Prepare Input").item.json.sessionId }, messaging_type: "RESPONSE", message: { text: String($("DigitalHub Sales Assistant").item.json.output || "").slice(0, 1990) } }) }}'),
       options: {}
     },
     credentials: { facebookGraphApi: newCredential('DigitalHub Page Access Token') },
-    position: [1460, 300]
+    position: [2320, 300]
   },
   output: [{ recipient_id: '24567890123456', message_id: 'm_abc123' }]
 });
@@ -369,7 +473,7 @@ const replyToTestChat = node({
       },
       options: {}
     },
-    position: [1460, 520]
+    position: [2320, 520]
   },
   output: [{ output: 'Assalamu Alaikum! DigitalHub e apnake shagotom.' }]
 });
@@ -405,7 +509,11 @@ export default workflow('digitalhub-messenger-bot', 'DigitalHub Messenger Sales 
   .to(prepareInput)
   .add(prepareInput)
   .to(salesAgent)
-  .to(isMessenger
+  .to(lookUpLead)
+  .to(isNewHotLead
+    .onTrue(emailHotLead.to(markAlertSent.to(isMessenger)))
+    .onFalse(isMessenger))
+  .add(isMessenger
     .onTrue(sendToMessenger)
     .onFalse(replyToTestChat))
   .add(setupNote)

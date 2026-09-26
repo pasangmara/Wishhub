@@ -14,6 +14,8 @@ Messenger Webhook ─GET─> Verify Webhook with Facebook
 Test Chat (n8n) ──────────────────────────────────────────────────────────┴> Prepare Input
   -> DigitalHub Sales Assistant (AI Agent + memory per customer)
        tools: Get Packages and Prices (Prices tab), Save or Update Lead (Leads tab, upsert on Lead ID)
+  -> Look Up Lead -> New Hot Lead? ─yes─> Email Hot Lead to Team (Gmail) -> Mark Hot Alert Sent ─┐
+                                  └no────────────────────────────────────────────────────────────┴> From Messenger?
   -> From Messenger? ─yes─> Send Reply on Messenger (Graph API /me/messages)
                      └no──> Reply to Test Chat
 ```
@@ -21,7 +23,7 @@ Test Chat (n8n) ─────────────────────�
 ## Setup
 
 1. **Google Sheet:** upload `DigitalHub-Chatbot-Sheet-Template.xlsx` to Google Drive, open it with Google Sheets, then use *File → Save as Google Sheets*. Name it `DigitalHub Chatbot`.
-2. **n8n:** connect a Google Sheets credential. In both **Get Packages and Prices** and **Save or Update Lead**, choose that spreadsheet.
+2. **n8n:** connect a Google Sheets credential. Select it in **Get Packages and Prices**, **Save or Update Lead**, **Look Up Lead** and **Mark Hot Alert Sent**, and choose that spreadsheet in each one. Then connect a Gmail credential in **Email Hot Lead to Team**.
 3. **Test:** click *Open chat* in the workflow and try messages like `price koto?`, `ওয়েবসাইট বানাতে কত লাগবে?` or `I need FB ads for my clothing page`. Check that rows appear in the Leads tab.
 4. **Messenger:**
    - Create a Meta app at developers.facebook.com and add the Messenger product.
@@ -40,4 +42,5 @@ Test Chat (n8n) ─────────────────────�
 
 - **Facebook's 24-hour rule:** the bot replies with `messaging_type: RESPONSE`, which only works within 24 hours of the customer's last message.
 - **Memory:** the bot uses n8n Simple Memory, which keeps the last 20 messages per customer. It resets if n8n restarts. Swap it for Postgres/Redis memory if you need long-term history.
-- **Human handoff:** the bot marks `Needs Human = Yes` in the sheet. Filter on that (or on `Lead Status = Hot`) for follow-up. You can add a Telegram or email alert later.
+- **Hot lead email:** the first time a lead's status becomes `Hot`, the workflow emails vingobd@gmail.com with the lead's details and sets `Hot Alert Sent = Yes`, so each lead triggers only one email. To send it somewhere else, change the address in **Email Hot Lead to Team**. If you set up the sheet before this change, add a `Hot Alert Sent` column to the Leads tab.
+- **Human handoff:** the bot marks `Needs Human = Yes` in the sheet. Filter on that for follow-up.
