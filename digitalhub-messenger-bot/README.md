@@ -1,0 +1,74 @@
+# DigitalHub Messenger Sales Bot (n8n)
+
+AI chatbot that answers DigitalHub's Facebook Messenger inbox in Bangla, Banglish and English, quotes packages from a Google Sheet, and saves every lead to Google Sheets.
+
+- n8n workflow: **DigitalHub Messenger Sales Bot** (`60VYfzPJEAjMFZpw`)
+- `workflow.sdk.ts`: the workflow source (n8n Workflow SDK), including the full system prompt
+- `DigitalHub-Chatbot-Sheet-Template.xlsx`: Google Sheet template with a `Leads` tab and a `Prices` tab (the prices are **SAMPLE** values)
+
+## How it works
+
+```
+Messenger Webhook ─GET─> Verify Webhook with Facebook
+                  └POST─> Acknowledge (200) -> Extract Customer Messages ─┐
+Test Chat (n8n) ──────────────────────────────────────────────────────────┴> Prepare Input
+  -> DigitalHub Sales Assistant (AI Agent + memory per customer)
+       tools: Get Packages and Prices (Prices tab), Save or Update Lead (Leads tab, upsert on Lead ID)
+  -> Look Up Lead -> New Hot Lead? ─yes─> Email Hot Lead to Team (Gmail) -> WhatsApp Hot Lead to Team -> Mark Hot Alert Sent ─┐
+                                  └no─────────────────────────────────────────────────────────────────────────────────┴> From Messenger?
+  -> From Messenger? ─yes─> Send Reply on Messenger (Graph API /me/messages)
+                     └no──> Reply to Test Chat
+```
+
+## Setup
+
+1. **Google Sheet:** upload `DigitalHub-Chatbot-Sheet-Template.xlsx` to Google Drive, open it with Google Sheets, then use *File → Save as Google Sheets*. Name it `DigitalHub Chatbot`.
+2. **n8n:** connect a Google Sheets credential. Select it in **Get Packages and Prices**, **Save or Update Lead**, **Look Up Lead** and **Mark Hot Alert Sent**, and choose that spreadsheet in each one. Then connect a Gmail credential in **Email Hot Lead to Team**, and a WhatsApp credential in **WhatsApp Hot Lead to Team** (see the WhatsApp alert steps below).
+3. **Test:** click *Open chat* in the workflow and try messages like `price koto?`, `ওয়েবসাইট বানাতে কত লাগবে?` or `I need FB ads for my clothing page`. Check that rows appear in the Leads tab.
+4. **Messenger:**
+   - Create a Meta app at developers.facebook.com and add the Messenger product.
+   - Connect the DigitalHub Page and generate a Page Access Token.
+   - In n8n, create a *Facebook Graph API* credential named `DigitalHub Page Access Token` and paste the token into it.
+   - Publish the workflow. In the Meta webhook settings, set:
+     - Callback URL: the production URL of the **Messenger Webhook** node
+     - Verify token: `digitalhub_verify_2026`
+   - Subscribe the webhook to `messages` and `messaging_postbacks`.
+5. **Before going live:**
+   - Replace the SAMPLE prices in the Prices tab.
+   - Fill in the `[bracketed]` company facts at the end of the agent's system message.
+   - Change the verify token if you like. It appears in the Verify node and in the Meta settings, so update both.
+
+## Notes
+
+- **Facebook's 24-hour rule:** the bot replies with `messaging_type: RESPONSE`, which only works within 24 hours of the customer's last message.
+- **Memory:** the bot uses n8n Simple Memory, which keeps the last 20 messages per customer. It resets if n8n restarts. Swap it for Postgres/Redis memory if you need long-term history.
+- **Hot lead email:** the first time a lead's status becomes `Hot`, the workflow emails vingobd@gmail.com with the lead's details and sets `Hot Alert Sent = Yes`, so each lead triggers only one email. To send it somewhere else, change the address in **Email Hot Lead to Team**. If you set up the sheet before this change, add a `Hot Alert Sent` column to the Leads tab.
+- **Hot lead WhatsApp:** sent right after the email, using the WhatsApp Cloud API. If either alert fails, the other still goes out, and so does the customer's reply.
+- **Human handoff:** the bot marks `Needs Human = Yes` in the sheet. Filter on that for follow-up.
+
+## WhatsApp alert setup (WhatsApp Cloud API)
+
+1. In your Meta app (the same one used for Messenger), add the **WhatsApp** product and link a WhatsApp Business account. Add the phone number the alerts will come **from**.
+2. In **WhatsApp Manager → Message templates**, create a template:
+   - Name: `hot_lead_alert`
+   - Category: **Utility**
+   - Language: **English**
+   - Body:
+     ```
+     🔥 New hot lead from the DigitalHub Messenger bot
+     Name: {{1}}
+     Phone: {{2}}
+     Service: {{3}}
+     Budget: {{4}}
+     Timeline: {{5}}
+     Summary: {{6}}
+     Please contact them as soon as possible.
+     ```
+   Submit it for review. Approval usually takes anywhere from a few minutes to a day.
+3. Create a **System User** in Meta Business Settings. Give it access to the app and the WhatsApp account, and generate a permanent token with the `whatsapp_business_messaging` and `whatsapp_business_management` permissions.
+4. In n8n, create a **WhatsApp API** credential with that token and your WhatsApp Business Account ID.
+5. In **WhatsApp Hot Lead to Team**:
+   - Select the sender's **Phone Number ID**.
+   - Set **Recipient Phone Number** to the team member's WhatsApp number, e.g. `8801XXXXXXXXX`.
+   - Re-select the template `hot_lead_alert` from the list.
+   To alert more than one person, duplicate this step once per number.
