@@ -362,6 +362,7 @@ const emailHotLead = node({
   version: 2.2,
   config: {
     name: 'Email Hot Lead to Team',
+    onError: 'continueRegularOutput',
     parameters: {
       resource: 'message',
       operation: 'send',
@@ -394,6 +395,38 @@ const emailHotLead = node({
   output: [{ id: '18c0a1b2c3d4', threadId: '18c0a1b2c3d4' }]
 });
 
+const whatsAppHotLead = node({
+  type: 'n8n-nodes-base.whatsApp',
+  version: 1.1,
+  config: {
+    name: 'WhatsApp Hot Lead to Team',
+    onError: 'continueRegularOutput',
+    parameters: {
+      resource: 'message',
+      operation: 'sendTemplate',
+      phoneNumberId: '',
+      recipientPhoneNumber: '8801XXXXXXXXX',
+      template: 'hot_lead_alert|en',
+      components: {
+        component: [{
+          type: 'body',
+          bodyParameters: { parameter: [
+          { type: 'text', text: expr('{{ String($("Look Up Lead").item.json["Name"] || "-").replace(/\\s+/g, " ").slice(0, 100) }}') },
+          { type: 'text', text: expr('{{ String($("Look Up Lead").item.json["Phone"] || "-").replace(/\\s+/g, " ").slice(0, 40) }}') },
+          { type: 'text', text: expr('{{ String($("Look Up Lead").item.json["Service Interested"] || "-").replace(/\\s+/g, " ").slice(0, 150) }}') },
+          { type: 'text', text: expr('{{ String($("Look Up Lead").item.json["Budget"] || "-").replace(/\\s+/g, " ").slice(0, 60) }}') },
+          { type: 'text', text: expr('{{ String($("Look Up Lead").item.json["Timeline"] || "-").replace(/\\s+/g, " ").slice(0, 60) }}') },
+          { type: 'text', text: expr('{{ String($("Look Up Lead").item.json["Conversation Summary"] || "-").replace(/\\s+/g, " ").slice(0, 400) }}') }
+          ] }
+        }]
+      }
+    },
+    credentials: { whatsAppApi: newCredential('WhatsApp Business') },
+    position: [1840, 280]
+  },
+  output: [{ messaging_product: 'whatsapp', messages: [{ id: 'wamid.abc' }] }]
+});
+
 const markAlertSent = node({
   type: 'n8n-nodes-base.googleSheets',
   version: 4.7,
@@ -416,7 +449,7 @@ const markAlertSent = node({
       options: {}
     },
     credentials: { googleSheetsOAuth2Api: newCredential('Google Sheets') },
-    position: [1840, 280]
+    position: [2080, 280]
   },
   output: [{ 'Lead ID': '24567890123456', 'Hot Alert Sent': 'Yes' }]
 });
@@ -432,7 +465,7 @@ const isMessenger = ifElse({
         combinator: 'and'
       }
     },
-    position: [2060, 400]
+    position: [2300, 400]
   }
 });
 
@@ -453,7 +486,7 @@ const sendToMessenger = node({
       options: {}
     },
     credentials: { facebookGraphApi: newCredential('DigitalHub Page Access Token') },
-    position: [2320, 300]
+    position: [2560, 300]
   },
   output: [{ recipient_id: '24567890123456', message_id: 'm_abc123' }]
 });
@@ -473,7 +506,7 @@ const replyToTestChat = node({
       },
       options: {}
     },
-    position: [2320, 520]
+    position: [2560, 520]
   },
   output: [{ output: 'Assalamu Alaikum! DigitalHub e apnake shagotom.' }]
 });
@@ -511,7 +544,7 @@ export default workflow('digitalhub-messenger-bot', 'DigitalHub Messenger Sales 
   .to(salesAgent)
   .to(lookUpLead)
   .to(isNewHotLead
-    .onTrue(emailHotLead.to(markAlertSent.to(isMessenger)))
+    .onTrue(emailHotLead.to(whatsAppHotLead.to(markAlertSent.to(isMessenger))))
     .onFalse(isMessenger))
   .add(isMessenger
     .onTrue(sendToMessenger)
