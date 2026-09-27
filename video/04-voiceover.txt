@@ -1,0 +1,34 @@
+WISH HUB: USA VOICEOVER SCRIPT (~115 words, ~88 sec with pauses)
+
+VOICE DIRECTION
+Warm, confident, friendly American narrator (male or female, 30s-40s).
+Conversational, not "announcer". Smile in the voice on the second half.
+Pace: ~150 words per minute. Pause where you see [pause].
+Suggested ElevenLabs settings: Stability ~45%, Similarity ~75%, Style ~20%.
+Export as WAV 48kHz. Generate each line separately so you can time it in the edit.
+
+---
+
+[01 HOOK, starts at 0:01, quiet and reflective]
+Your team is busy. [pause] Your clients are busy. [pause] And the moments that build loyalty... [pause] slip through the cracks.
+
+[02 TURN, 0:11, a small lift of hope]
+Wish Hub remembers them for you.
+
+[03 SHOWCASE, 0:17, energy up, smiling]
+Beautiful, ready-to-send digital cards for every occasion: birthdays, work anniversaries, holidays, client milestones.
+
+[04 HOW IT WORKS, 0:31, crisp rhythm]
+Pick a card. [pause] Personalize it. [pause] Schedule it once. [pause] Wish Hub delivers it at the perfect moment.
+
+[05 YOUR BRAND, 0:43, confident]
+Your logo. Your message. Their name. [pause] Every wish carries your brand.
+
+[06 AUTOMATION, 0:55, smooth]
+Recurring events, holiday calendars, automatic delivery by email and WhatsApp, all from one simple dashboard.
+
+[07 OFFER, 1:07, clear and inviting]
+Start your free trial today, or book a free demo, and we'll set up your first branded cards with you.
+
+[08 CLOSE, 1:17, warm, slower]
+Every occasion. [pause] One beautiful wish. [long pause] Wish Hub. [pause] We remember it for you.

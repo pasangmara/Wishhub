@@ -1,0 +1,61 @@
+# Edit & Assembly Guide
+
+## 0. Prep checklist (before opening the editor)
+- [ ] **US card set** (8–12 cards) made in the Wish Hub library or Canva, in brand colors with a sample company logo:
+      Happy Birthday · Work Anniversary ("Happy 5 Years, Mike!") · Welcome to the Team · Employee Spotlight ·
+      Thank You, Valued Client ("10 Years Together") · Happy Thanksgiving · Happy Holidays · Happy New Year ·
+      4th of July · Diwali · Eid Mubarak · Lunar New Year
+- [ ] **Screen recordings** of wishhub.digitalhubbd.com at 1920×1080 or higher: browse the library → edit the message → pick a date → send confirmation → dashboard with upcoming events.
+      Use clean demo data with US names (Mike, Laura, Jessica…), hide the browser bookmarks bar, and zoom the browser to 110–125% for readability.
+- [ ] **Logo files:** Wish Hub logo as PNG with a transparent background (plus the white version)
+- [ ] **Flow clips** C1–C10 (see `03-flow-prompts.md`)
+- [ ] **Voiceover** lines 01–08 (see `04-voiceover.txt`)
+- [ ] **Music track + SFX** (see `05-music-sfx-brief.md`)
+
+## 1. Timeline (16:9 master, 24fps, 3840×2160 or 1920×1080)
+| Time | V1 (footage) | V2 (overlays / graphics) | Audio |
+|---|---|---|---|
+| 0:00–0:05 | C1 office | Text: "We forget. We get busy." | Ambience, music intro, VO 01 |
+| 0:05–0:10 | C2 Rachel close-up | Calendar tile + Laura's email preview (slide-in UI cards); text: "We miss important moments." | Ding, tick, heartbeat |
+| 0:10–0:16 | C3 butterfly → white | Wish Hub logo reveal; text: "We remember it for you." | Whoosh, chime, VO 02 |
+| 0:16–0:23 | C4 floating cards | "One platform. Every celebration." | Beat drop, whooshes, VO 03 |
+| 0:23–0:30 | C5 / Canva grid zoom-out | "Ready to share." | Sparkle |
+| 0:30–0:42 | Screen recording ⇄ C6 | Step labels: Discover · Personalize · Schedule · Send | Clicks, VO 04 |
+| 0:42–0:48 | Card-branding animation | Logo pop → name type-on → message | Pop, typewriter, VO 05 |
+| 0:48–0:54 | C7 Mike's smile | "Your logo. Your message. Their name." | Buzz, laugh |
+| 0:54–1:00 | Dashboard screen recording | Feature chips animate in | Pops, VO 06 |
+| 1:00–1:06 | C8 Laura | Email with "10 Years Together" card on her laptop screen; "Set it once. It runs every year." | Email chime |
+| 1:06–1:16 | Offer gradient plate | "Try Wish Hub free." + [Start Free Trial] [Book a Free Demo] | Click, chime, VO 07 |
+| 1:16–1:22 | C9 celebration | Screen-replace the wall monitor with the Mike card | Laughter, VO 08 |
+| 1:22–1:28 | C10 → white | "Every Occasion. One Beautiful Wish." → logo lockup → URL + "Book your free demo" | Ending hit, sparkle |
+
+## 2. Style rules
+- **Transitions:** mostly straight cuts on the beat. Use a **butterfly-wipe** or light-leak only at: hook→turn (0:10), turn→showcase (0:16), offer→close (1:16).
+- **Text:** max 6 words on screen at a time, 1.5–2.5s each. Sans-serif (Poppins/Inter) for body, serif (Cinzel Decorative) for taglines only.
+- **Colors:** white backgrounds, magenta + royal-blue accents, a light orange glow for warmth. Keep it airy and premium.
+- **Motion:** smooth ease-in/ease-out, no bouncy cartoon animations. Keep a subtle 102–105% slow zoom on still graphics.
+- **Captions:** burn in captions for the social cuts (most social video is watched muted). Keep them optional on YouTube.
+- **Color grade:** match all Veo clips to one warm look. Lift the shadows slightly on the hook, and make the ending brighter than the opening (dark → light arc).
+
+## 3. Tools
+- **CapCut (desktop):** easiest; has auto-captions and a good template/text library
+- **DaVinci Resolve (free):** best color matching and audio (Fairlight)
+- **Premiere Pro + After Effects:** best for the logo reveal, UI animations and monitor screen replacement
+
+## 4. Exports
+| Version | Ratio | Resolution | Use |
+|---|---|---|---|
+| Master (~88s) | 16:9 | 3840×2160 or 1920×1080, H.264, 20–40 Mbps | Website, YouTube, sales emails, pitch meetings |
+| LinkedIn | 16:9 or 1:1 | 1920×1080 / 1080×1080 | LinkedIn feed + ads |
+| Social cut (30s) | 9:16 | 1080×1920 | Reels, TikTok, Shorts |
+| Silent loop (15s) | 16:9 | 1920×1080, no audio | Trade-show screens, website hero |
+
+Audio: AAC 320 kbps, -14 LUFS integrated, -1 dBTP true peak.
+
+## 5. Final QA before sending to US clients
+- [ ] No Bangladesh-only references in the US cut (phone number, BD-specific holidays as the lead)
+- [ ] Every card, name and date is spelled correctly and uses US date format (e.g. "Nov 27")
+- [ ] The CTA URL is correct and live, and the demo booking link works
+- [ ] Music and SFX licenses cover commercial use
+- [ ] Watch once muted: does it still make sense with captions only?
+- [ ] Watch once on a phone: is the text readable?
