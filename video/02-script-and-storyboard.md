@@ -9,7 +9,7 @@ A busy manager misses the moments that matter (hook). Wish Hub remembers for the
 cards go out automatically (value). Try it free (offer). The team and clients feel valued (payoff).
 
 ## Recurring characters (use the SAME description in every Flow prompt for consistency)
-- **RACHEL (the manager):** woman in her late 30s, shoulder-length dark brown hair, navy blazer over a white blouse, small gold earrings
+- **RACHEL (the manager):** woman in her late 30s, wavy dark brown hair just past the shoulders, navy blazer over a white blouse, small gold hoop earrings
 - **MIKE (the employee):** man in his early 30s, short curly black hair, trimmed beard, light-gray quarter-zip sweater
 - **LAURA (the client):** woman in her 50s, silver bob haircut, cream turtleneck, reading glasses
 - **Office:** modern open-plan US tech office, glass walls, plants, warm late-afternoon sunlight
