@@ -1,20 +1,26 @@
 # Google Flow (Veo 3) Prompts: Copy & Paste
 
-## Test clip review (C1 + C2, generated in Flow Omni, 10s each, 1280×720)
+## Clip review so far (generated in Flow Omni, 10s each, 1280×720)
 | Clip | Verdict | Use this part | Notes |
 |---|---|---|---|
 | C1 busy office | ✅ Keep | **3.0s → 7.5s** | Great golden-hour look, and it ends on Rachel at her desk covered in sticky notes. The first ~2.8s has a purple/magenta light streak across the top-left glass, so skip it. |
 | C2 realization | ✅ Keep (hero) | **3.6s → 9.1s** | Strong acting. Omni added a small green "✓" notification pop-up at **2.4–3.5s** (bottom-right), so start after it. Our calendar and email cards cover this corner anyway. |
+| C3 butterfly | ✅ Excellent | **3.5s → 10.0s** | The butterfly glows on the screen, flies out, circles, bursts into particles and ends on warm bokeh, a perfect bed for the logo reveal. |
+| C6 Rachel relaxed | ✅ Keep | **2.0s → 10.0s** | Matches the Rachel reference. She smiles, types, and sips coffee at the end. ⚠️ **An Apple logo is visible on the laptop lid**, so blur/mask it in the edit (the camera is locked off, so a static blur works). |
+| C7 Mike | ✅ Keep (hero) | **4.0s → 10.0s** | The phone lights up, he picks it up, a genuine smile, a coworker pats his shoulder, he laughs. 2–4s is a tight insert on the hands and phone (optional cutaway). |
 
 **Lessons applied to the prompts below:**
 - Rachel's look is now locked to the C2 version: **wavy dark brown hair just past the shoulders, gold hoop earrings**. Upload the still `rachel-reference.png` (C2 at 1.2s) as the reference/ingredient for C6, C9 and C10.
 - Every prompt now also says **"no floating UI or notification pop-ups"**.
 - Omni clips run 10s. The timeline only needs 5–7s from each, so let the camera move settle and trim in the edit.
+- Mike's look is now locked to the C7 version: **gray crewneck sweater over a collared shirt**. Upload `mike-reference.png` (C7 at 8.5s) for C9.
+- Laptops and phones must be **unbranded** (C6 came back with an Apple logo), so C8–C10 now say so.
+- The US card set is ready in `assets/cards/` (12 cards, 1080×1350), plus `assets/cards-grid-16x9.png` (4K grid of all 12).
 - Clips come out at 720p. Download at 1080p (upscale) if Flow offers it; if not, upscale in the editor.
 
 ## How to use these in Flow
 1. Create a new Flow project called **"Wish Hub – USA"**. Set the aspect ratio to **16:9** (make a second project at **9:16** for social).
-2. Use **Text to Video** for each clip below. Each clip is **8 seconds**. Generate 2–4 takes and keep the best one.
+2. Use **Text to Video** for each clip below. Each clip is **8–10 seconds** (Omni makes 10s). Generate 2–4 takes and keep the best one.
 3. For the card showcase (C4, C5), use **Frames to Video / Ingredients** and upload your real card images
    so Veo animates *your* designs, not invented ones.
 4. **Keep characters consistent:** always paste the exact character descriptions (they're already in the prompts).
@@ -54,7 +60,9 @@ Cinematic, macro lens, shallow depth of field, dreamy light bloom, magenta and b
 *End on white glow, then cut to the logo animation in your editor.*
 
 ## C4 · Showcase: floating cards (0:16–0:23)
-Use **Ingredients / Frames to Video** with 3–5 of your real card images uploaded.
+Use **Ingredients to Video** and upload **3 cards** from `assets/cards/` as ingredients. Make 2 takes with different trios so the showcase shows 6 cards:
+- Take A: `01-work-anniversary-mike`, `06-thanksgiving`, `07-happy-holidays`
+- Take B: `02-birthday`, `10-diwali`, `05-client-thank-you-10-years`
 ```
 A bright, minimal white studio space with soft pastel gradients of pink and blue. Elegant digital greeting cards float in mid-air, gently rotating and gliding past the camera in a graceful choreographed sequence, each card flipping to face the camera one after another. Soft reflections on a glossy floor below. Camera slowly orbits the floating cards.
 Audio: soft airy whooshes as each card passes, light paper flick sounds, subtle sparkle.
@@ -67,7 +75,7 @@ Top-down camera rising slowly upward to reveal dozens of colorful digital greeti
 Audio: soft rising shimmer, subtle sparkle at the end.
 Premium product commercial style, overhead crane shot, bright soft studio light, vibrant but tasteful colors, photorealistic, 24fps. No readable text, no subtitles, no dialogue, no music.
 ```
-*Best result: build this grid in Canva from your real cards and animate the zoom-out in the editor. Use this Veo shot only as a fallback.*
+*Best result: skip Flow for this shot. Put `assets/cards-grid-16x9.png` in the editor and animate a slow zoom-out (e.g. 140% → 100% over 7s) with a light sweep. It's sharp, the text is 100% correct, and it costs no credits. If you still want motion from Flow, use **Frames to Video** with the grid image as the first frame and the prompt above.*
 
 ## C6 · How it works: Rachel relaxed (0:30–0:42, intercut with screen recording)
 ```
@@ -78,29 +86,30 @@ Cinematic commercial, 35mm lens, shallow depth of field, soft golden natural lig
 
 ## C7 · Your brand: Mike's smile (0:48–0:54) ⭐ hero shot
 ```
-Medium close-up of MIKE, a man in his early 30s with short curly black hair, a trimmed beard and a light-gray quarter-zip sweater, sitting at a desk in a bright modern office. His smartphone on the desk lights up and buzzes. He picks it up, reads, and his face breaks into a genuine, surprised, touched smile. A coworker walks by and gives him a friendly pat on the shoulder, and he laughs.
+Medium close-up of MIKE, a man in his early 30s with short curly black hair, a trimmed beard and a gray crewneck sweater over a collared shirt, sitting at a desk in a bright modern office. His smartphone on the desk lights up and buzzes. He picks it up, reads, and his face breaks into a genuine, surprised, touched smile. A coworker walks by and gives him a friendly pat on the shoulder, and he laughs.
 Audio: phone vibration buzz, soft office ambience, a warm short laugh.
 Cinematic commercial, 50mm lens, shallow depth of field, bright soft natural window light, warm color grade with subtle magenta and blue accents, photorealistic, 24fps. No on-screen text, no subtitles, no logos, no floating UI or notification pop-ups, no dialogue, no music.
 ```
 
 ## C8 · Automation: Laura, the client (1:00–1:06)
 ```
-Medium shot of LAURA, a woman in her 50s with a silver bob haircut, a cream turtleneck and reading glasses, sitting in an elegant home office with bookshelves and morning light. She opens her laptop, reads an email, and her face softens into a heartfelt smile. She gently places her hand over her heart and nods.
+Medium shot of LAURA, a woman in her 50s with a silver bob haircut, a cream turtleneck and reading glasses, sitting in an elegant home office with bookshelves and morning light. She opens an unbranded silver laptop with no logo, reads an email, and her face softens into a heartfelt smile. She gently places her hand over her heart and nods.
 Audio: soft morning ambience, birds faintly outside, a gentle email notification chime.
 Cinematic commercial, 35mm lens, shallow depth of field, soft warm morning light, warm color grade with subtle magenta and blue accents, photorealistic, 24fps. No on-screen text, no subtitles, no logos, no floating UI or notification pop-ups, no dialogue, no music.
 ```
 
 ## C9 · Close: the celebration (1:16–1:22) ⭐ hero shot
 ```
-Warm medium-wide shot in a modern American office. A small diverse team gathers around MIKE, a man in his early 30s with short curly black hair, trimmed beard, light-gray quarter-zip sweater, who is holding a small cake with a single lit candle. RACHEL, a woman in her late 30s with wavy dark brown hair just past the shoulders, navy blazer over a white blouse, small gold hoop earrings, stands beside him smiling proudly. Everyone claps and laughs. A large wall monitor behind them glows with a colorful greeting card. Confetti drifts slowly in the golden light.
+Warm medium-wide shot in a modern American office. A small diverse team gathers around MIKE, a man in his early 30s with short curly black hair, trimmed beard, gray crewneck sweater over a collared shirt, who is holding a small cake with a single lit candle. RACHEL, a woman in her late 30s with wavy dark brown hair just past the shoulders, navy blazer over a white blouse, small gold hoop earrings, stands beside him smiling proudly. Everyone claps and laughs. A large wall monitor behind them glows with soft colorful abstract light. Confetti drifts slowly in the golden light.
 Audio: warm laughter, light applause, cheerful office ambience.
 Cinematic commercial, 35mm lens, shallow depth of field, golden-hour window light, warm joyful color grade with subtle magenta and blue accents, photorealistic, 24fps. No on-screen text, no subtitles, no logos, no floating UI or notification pop-ups, no dialogue, no music.
 ```
-*In the editor, replace the wall monitor with your branded "Happy 5 Years, Mike!" card (screen replacement / tracking).*
+Upload **both** `rachel-reference.png` and `mike-reference.png` as ingredients.
+*In the editor, put `assets/cards/01-work-anniversary-mike.png` on the wall monitor (screen replacement / corner-pin tracking).*
 
 ## C10 · Close: final hero push-in (1:22–1:28)
 ```
-Slow cinematic push-in on RACHEL, a woman in her late 30s with wavy dark brown hair just past the shoulders, navy blazer over a white blouse, small gold hoop earrings, standing by a large office window at golden hour, looking at her phone with a calm, content smile. Soft lens flare. The frame gradually brightens and fades into soft white light.
+Slow cinematic push-in on RACHEL, a woman in her late 30s with wavy dark brown hair just past the shoulders, navy blazer over a white blouse, small gold hoop earrings, standing by a large office window at golden hour, looking at her unbranded phone with a calm, content smile. Soft lens flare. The frame gradually brightens and fades into soft white light.
 Audio: gentle ambient room tone, faint distant laughter.
 Cinematic commercial, 50mm lens, shallow depth of field, golden-hour backlight, warm dreamy color grade with subtle magenta and blue accents, photorealistic, 24fps. No on-screen text, no subtitles, no logos, no floating UI or notification pop-ups, no dialogue, no music.
 ```

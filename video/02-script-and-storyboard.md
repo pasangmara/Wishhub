@@ -10,7 +10,7 @@ cards go out automatically (value). Try it free (offer). The team and clients fe
 
 ## Recurring characters (use the SAME description in every Flow prompt for consistency)
 - **RACHEL (the manager):** woman in her late 30s, wavy dark brown hair just past the shoulders, navy blazer over a white blouse, small gold hoop earrings
-- **MIKE (the employee):** man in his early 30s, short curly black hair, trimmed beard, light-gray quarter-zip sweater
+- **MIKE (the employee):** man in his early 30s, short curly black hair, trimmed beard, gray crewneck sweater over a collared shirt
 - **LAURA (the client):** woman in her 50s, silver bob haircut, cream turtleneck, reading glasses
 - **Office:** modern open-plan US tech office, glass walls, plants, warm late-afternoon sunlight
 
@@ -44,7 +44,7 @@ cards go out automatically (value). Try it free (offer). The team and clients fe
 ### 3) SECOND IMPRESSION: Card Showcase · 0:16–0:30
 | | |
 |---|---|
-| **Visual** | Clips C4 + C5: premium floating-card sequence. Real Wish Hub cards (US set) glide, flip and stack in a bright studio space: **Happy Birthday · Work Anniversary · Welcome to the Team · Employee Spotlight · Happy Thanksgiving · Happy Holidays · 4th of July · Diwali · Eid · Lunar New Year · Thank You, Valued Client.** Finish on a wide grid of dozens of cards. |
+| **Visual** | Clips C4 + C5: premium floating-card sequence. Real Wish Hub cards (US set, `assets/cards/`) glide, flip and stack in a bright studio space: **Happy Birthday · Work Anniversary · Welcome to the Team · Employee Spotlight · Happy Thanksgiving · Happy Holidays · 4th of July · Diwali · Eid · Lunar New Year · Thank You, Valued Client.** Finish on a wide grid of dozens of cards. |
 | **On-screen text** | *One platform.* → *Every celebration.* → *Ready to share.* |
 | **VO** | "Beautiful, ready-to-send digital cards for every occasion: birthdays, work anniversaries, holidays, client milestones." |
 | **Music** | Beat drops. Upbeat, modern, optimistic corporate pop. |

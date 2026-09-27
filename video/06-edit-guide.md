@@ -1,16 +1,27 @@
 # Edit & Assembly Guide
 
 ## 0. Prep checklist (before opening the editor)
-- [ ] **US card set** (8–12 cards) made in the Wish Hub library or Canva, in brand colors with a sample company logo:
-      Happy Birthday · Work Anniversary ("Happy 5 Years, Mike!") · Welcome to the Team · Employee Spotlight ·
-      Thank You, Valued Client ("10 Years Together") · Happy Thanksgiving · Happy Holidays · Happy New Year ·
-      4th of July · Diwali · Eid Mubarak · Lunar New Year
+- [x] **US card set**: done, 12 cards in `assets/cards/` (1080×1350, brand colors, sample sender "Summit & Co."):
+      Work Anniversary ("5 Years, Mike Johnson") · Happy Birthday · Welcome to the Team · Employee Spotlight ·
+      Client Thank You ("10 Years Together") · Thanksgiving · Happy Holidays · Happy New Year 2027 ·
+      4th of July · Diwali · Eid Mubarak · Lunar New Year. Also upload them to the Wish Hub library.
 - [ ] **Screen recordings** of wishhub.digitalhubbd.com at 1920×1080 or higher: browse the library → edit the message → pick a date → send confirmation → dashboard with upcoming events.
       Use clean demo data with US names (Mike, Laura, Jessica…), hide the browser bookmarks bar, and zoom the browser to 110–125% for readability.
 - [ ] **Logo files:** Wish Hub logo as PNG with a transparent background (plus the white version)
 - [ ] **Flow clips** C1–C10 (see `03-flow-prompts.md`)
 - [ ] **Voiceover** lines 01–08 (see `04-voiceover.txt`)
 - [ ] **Music track + SFX** (see `05-music-sfx-brief.md`)
+
+## 0.5 Clip trims (from the Flow Omni takes)
+| Clip | Use | Fix in the edit |
+|---|---|---|
+| C1 busy office | 3.0s → 7.5s | Skip the first 2.8s (purple light streak) |
+| C2 realization | 3.6s → 9.1s | Skip 2.4–3.5s (AI "✓" pop-up) |
+| C3 butterfly | 3.5s → 10.0s, hold the last frame 1.5s | Logo + "We Remember It For You." fade in over the particle glow |
+| C6 Rachel relaxed | 2.0s → 10.0s | **Blur/mask the Apple logo** on the laptop lid |
+| C7 Mike | 4.0s → 10.0s (2–4s optional hand insert) | none |
+
+Ready-made assets in `assets/`: the logo (`wishhub-logo.png`, transparent), hook overlays, 12 US cards, and a 4K card grid.
 
 ## 1. Timeline (16:9 master, 24fps, 3840×2160 or 1920×1080)
 | Time | V1 (footage) | V2 (overlays / graphics) | Audio |
