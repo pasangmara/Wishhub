@@ -20,17 +20,11 @@ BRAND = {
     "ink": "#150C13", "cream": "#FBF3E4", "gold": "#F5B83D",
 }
 
-LOGO_SVG = """
-<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-  <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
-    <stop offset="0" stop-color="#F2488F"/><stop offset="1" stop-color="#F7A94A"/></linearGradient></defs>
-  <rect width="100" height="100" rx="26" fill="url(#lg)"/>
-  <g fill="none" stroke="#fff" stroke-width="6.5">
-    <ellipse cx="50" cy="31" rx="9" ry="12.5"/><ellipse cx="50" cy="69" rx="9" ry="12.5"/>
-    <ellipse cx="31" cy="50" rx="12.5" ry="9"/><ellipse cx="69" cy="50" rx="12.5" ry="9"/>
-  </g>
-  <circle cx="50" cy="50" r="4.5" fill="#fff"/>
-</svg>"""
+LOGO_SVG = ('<div class="logo-tile"><img src="../../assets/vingo_logo.png" alt="Vingo"></div>')
+LOGO_CSS = """
+.logo-tile { background:#fff; border-radius:24%; display:flex; align-items:center; justify-content:center;
+             box-shadow:0 6px 18px rgba(40,0,20,.25); flex:none; }
+.logo-tile img { width:78%; height:78%; object-fit:contain; }"""
 
 BASE_CSS = f"""
 @import url('../../fonts/fonts.css');
@@ -39,7 +33,7 @@ html, body {{ width: 1920px; height: 1080px; overflow: hidden; background: trans
 body {{ font-family: Manrope, 'Hind Siliguri', sans-serif; -webkit-font-smoothing: antialiased; }}
 .bn {{ font-family: 'Hind Siliguri', sans-serif; }}
 .display {{ font-family: 'Baloo Da 2', 'Hind Siliguri', sans-serif; }}
-"""
+""" + LOGO_CSS
 
 
 def page_html(body, css="", js="function render(t){}"):
@@ -48,6 +42,11 @@ def page_html(body, css="", js="function render(t){}"):
 
 
 # ---------------------------------------------------------------- overlays (static, transparent)
+
+def story_captions():
+    tl = json.load(open(ROOT / "vo2" / "timeline.json"))
+    return {f"cap_{x['id']}": x["cap"] for x in tl}
+
 
 CAPTIONS = {
     "cap_riya": "“Ammu, let’s make the Eid card this year.”",
@@ -79,10 +78,10 @@ CHIPS = {
 
 def caption_html(text):
     css = """
-    .cap { position:absolute; left:50%; bottom:86px; transform:translateX(-50%); max-width:1560px;
+    .cap { position:absolute; left:50%; bottom:86px; transform:translateX(-50%); width:max-content; max-width:1640px;
            padding:18px 38px 20px; border-radius:22px; background:rgba(21,12,19,.62);
            color:#fff; font-weight:700; font-size:44px; line-height:1.25; text-align:center;
-           letter-spacing:.2px; box-shadow:0 10px 40px rgba(0,0,0,.25); white-space:nowrap; }"""
+           letter-spacing:.2px; box-shadow:0 10px 40px rgba(0,0,0,.25); }"""
     return page_html(f'<div class="cap">{text}</div>', css)
 
 
@@ -92,7 +91,7 @@ def chip_html(en, bn):
             padding:18px 34px 18px 18px; border-radius:28px;
             background:linear-gradient(160deg,{BRAND['pink']} 0%,{BRAND['red']} 55%,{BRAND['plum']} 100%);
             box-shadow:0 14px 44px rgba(122,24,84,.45); }}
-    .chip svg {{ width:78px; height:78px; filter:drop-shadow(0 2px 6px rgba(0,0,0,.2)); }}
+    .chip .logo-tile {{ width:78px; height:78px; }}
     .en {{ color:#fff; font-weight:800; font-size:46px; line-height:1.05; }}
     .bn {{ color:rgba(251,243,228,.92); font-weight:600; font-size:28px; line-height:1.2; margin-top:4px; }}"""
     return page_html(f'<div class="chip">{LOGO_SVG}<div><div class="en">{en}</div><div class="bn">{bn}</div></div></div>', css)
@@ -217,7 +216,7 @@ def seg_endcard():
             linear-gradient(160deg,{BRAND['pink']} 0%,{BRAND['red']} 55%,{BRAND['plum']} 100%); }}
     .col {{ position:absolute; left:140px; top:0; bottom:0; width:980px; display:flex; flex-direction:column; justify-content:center; color:#fff; }}
     .brand {{ display:flex; align-items:center; gap:22px; }}
-    .brand svg {{ width:110px; height:110px; filter:drop-shadow(0 8px 20px rgba(0,0,0,.25)); }}
+    .brand .logo-tile {{ width:120px; height:120px; }}
     .word {{ font-weight:800; font-size:92px; letter-spacing:-1px; }}
     .h1 {{ font-family:'Baloo Da 2',sans-serif; font-weight:800; font-size:100px; line-height:1.05; margin-top:34px; }}
     .h2 {{ font-weight:700; font-size:44px; opacity:.95; margin-top:8px; }}
@@ -253,6 +252,62 @@ def seg_endcard():
     return page_html(body, css, js), 10.5
 
 
+# ---------------------------------------------------------------- laptop screen content (1600x1000)
+
+def editor_html(after):
+    card_before = '<div class="card plain"><img src="../../assets/family_photo.jpg"></div>'
+    card_after = """<div class="card eid"><div class="arch"><img src="../../assets/family_photo.jpg"></div>
+      <div class="eidtxt">ঈদ মোবারক</div><div class="love">Love, Ammu &amp; Riya</div></div>"""
+    css = f"""
+    html, body {{ width:1600px; height:1000px; background:#fff; }}
+    .bar {{ height:56px; background:#F4EEE6; display:flex; align-items:center; padding:0 22px; gap:10px; }}
+    .dot {{ width:14px; height:14px; border-radius:50%; }}
+    .url {{ margin-left:26px; width:560px; height:34px; border-radius:17px; background:#fff; display:flex; align-items:center;
+            padding:0 18px; font-weight:700; font-size:19px; color:#3b2a33; }}
+    .top {{ height:84px; display:flex; align-items:center; gap:18px; padding:0 30px; border-bottom:2px solid #f1e6da; background:{BRAND['cream']}; }}
+    .top .logo-tile {{ width:56px; height:56px; }}
+    .word {{ font-weight:800; font-size:36px; color:{BRAND['ink']}; }}
+    .doc {{ margin-left:28px; font-weight:700; font-size:22px; color:#6b5560; }}
+    .share {{ margin-left:auto; background:{BRAND['gold']}; color:{BRAND['ink']}; font-weight:800; font-size:22px; padding:12px 28px; border-radius:26px; }}
+    .side {{ position:absolute; top:140px; left:0; bottom:0; width:120px; background:#fbf7f1; border-right:2px solid #f1e6da;
+             display:flex; flex-direction:column; align-items:center; gap:22px; padding-top:28px; }}
+    .tool {{ width:70px; height:70px; border-radius:18px; background:#efe5da; }}
+    .tool.on {{ background:linear-gradient(160deg,{BRAND['pink']},{BRAND['red']}); box-shadow:0 8px 20px rgba(224,30,60,.45); }}
+    .stage {{ position:absolute; top:140px; left:120px; right:400px; bottom:0; background:#ece6df; display:flex; align-items:center; justify-content:center; }}
+    .card {{ width:640px; height:640px; border-radius:18px; overflow:hidden; box-shadow:0 26px 60px rgba(40,0,20,.35); background:#fff; position:relative; }}
+    .card.plain {{ width:700px; height:460px; }} .plain img {{ width:100%; height:100%; object-fit:cover; }}
+    .eid {{ background:url(../../assets/alpona_bg.jpg) center/cover; }}
+    .arch {{ position:absolute; left:34px; right:34px; top:34px; height:392px; border-radius:200px 200px 22px 22px; overflow:hidden;
+             border:10px solid {BRAND['gold']}; box-shadow:0 0 0 4px #fff4, 0 18px 40px rgba(0,0,0,.35); }}
+    .arch img {{ width:100%; height:100%; object-fit:cover; object-position:50% 30%; }}
+    .eidtxt {{ position:absolute; left:0; right:0; top:432px; text-align:center; font-family:'Baloo Da 2',sans-serif; font-weight:800;
+               font-size:84px; color:{BRAND['gold']}; text-shadow:0 4px 14px rgba(0,0,0,.45); }}
+    .love {{ position:absolute; left:0; right:0; bottom:24px; text-align:center; color:#fff; font-weight:700; font-size:26px; }}
+    .panel {{ position:absolute; top:140px; right:0; bottom:0; width:400px; background:#fff; border-left:2px solid #f1e6da; padding:30px 28px; }}
+    .ptitle {{ font-family:'Baloo Da 2',sans-serif; font-weight:800; font-size:40px; color:{BRAND['ink']}; }}
+    .psub {{ font-weight:700; font-size:22px; color:#8a7580; margin-top:2px; }}
+    .thumbs {{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:26px; }}
+    .th {{ height:150px; border-radius:16px; background-size:cover; background-position:center; }}
+    .th.sel {{ outline:6px solid {BRAND['red']}; outline-offset:3px; }}
+    .apply {{ margin-top:30px; text-align:center; padding:20px; border-radius:20px; font-weight:800; font-size:28px; color:#fff;
+              background:linear-gradient(160deg,{BRAND['pink']},{BRAND['red']} 60%,{BRAND['plum']}); }}"""
+    body = f"""<div class="bar"><div class="dot" style="background:#FF5F57"></div><div class="dot" style="background:#FEBC2E"></div>
+      <div class="dot" style="background:#28C840"></div><div class="url">🔒 vingobd.com</div></div>
+      <div class="top">{LOGO_SVG}<div class="word">vingo</div><div class="doc">Eid card for Nanu</div><div class="share">Share</div></div>
+      <div class="side"><div class="tool"></div><div class="tool"></div><div class="tool on"></div><div class="tool"></div><div class="tool"></div></div>
+      <div class="stage">{card_after if after else card_before}</div>
+      <div class="panel"><div class="ptitle">ম্যাজিক আলপনা</div><div class="psub">Magic Alpona</div>
+        <div class="thumbs"><div class="th {'sel' if after else ''}" style="background-image:url(../../assets/thumb_alpona.jpg)"></div>
+          <div class="th" style="background-image:url(../../assets/thumb_kantha.jpg)"></div>
+          <div class="th" style="background-image:url(../../assets/thumb_rickshaw.jpg)"></div>
+          <div class="th" style="background-image:url(../../assets/alpona_bg.jpg)"></div></div>
+        <div class="apply">{'✓ Applied' if after else '✨ Apply in one click'}</div></div>"""
+    return page_html(body, css)
+
+
+SCREENS = {"screen_editor_before": lambda: editor_html(False), "screen_editor_after": lambda: editor_html(True)}
+
+
 SEGMENTS = {"site_alpona": seg_site_alpona, "smart_resize": seg_smart_resize,
             "templates": seg_templates, "endcard": seg_endcard}
 
@@ -274,12 +329,21 @@ def main(only=None):
 
         if not only or only == "overlays":
             items = {"hook": hook_html()}
-            items.update({k: caption_html(v) for k, v in CAPTIONS.items()})
+            items.update({k: caption_html(v) for k, v in CAPTIONS.items() if k in ("cap_riya", "cap_nanu")})
+            items.update({k: caption_html(v) for k, v in story_captions().items()})
             items.update({k: chip_html(*v) for k, v in CHIPS.items()})
             for name, html in items.items():
                 load(name, html)
                 pg.screenshot(path=str(OUT / "overlays" / f"{name}.png"), omit_background=True)
             print("overlays:", len(items))
+
+        if not only or only == "screens":
+            pg.set_viewport_size({"width": 1600, "height": 1000})
+            for name, fn in SCREENS.items():
+                load(name, fn())
+                pg.screenshot(path=str(ROOT / "assets" / f"{name}.png"))
+            pg.set_viewport_size({"width": 1920, "height": 1080})
+            print("screens:", len(SCREENS))
 
         for name, fn in SEGMENTS.items():
             if only and only not in (name, "segments"):

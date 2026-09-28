@@ -17,8 +17,11 @@ X = 0.2  # cross-dissolve length (s)
 GRADE = "eq=contrast=1.03:saturation=1.06,unsharp=5:5:0.5"
 
 
+SCREENS = ROOT.parent / "renders" / "clips_screen"
+
+
 def clip(name):
-    m = sorted(CLIPS.glob(f"*{name}*.mp4"))
+    m = sorted(SCREENS.glob(f"*{name}*.mp4")) or sorted(CLIPS.glob(f"*{name}*.mp4"))
     if not m:
         raise SystemExit(f"missing clip: {name}")
     return str(m[0])
@@ -44,23 +47,34 @@ SEGMENTS = [
 ]
 
 # overlay name, start, end (timeline seconds)
-OVERLAYS = [
-    ("hook", 0.4, 6.6), ("cap01", 1.0, 5.2), ("cap_riya", 8.1, 10.5), ("cap02", 10.8, 13.7),
-    ("chip_alpona", 14.6, 20.9), ("cap03", 15.0, 19.6),
-    ("cap04a", 25.3, 28.3), ("cap04b", 28.3, 31.8),
-    ("chip_writer", 32.3, 37.9), ("cap05", 32.4, 37.7),
-    ("chip_business", 48.4, 54.9), ("cap08", 48.6, 53.0),
-    ("chip_bgremove", 55.3, 60.9), ("cap09", 55.8, 58.3),
-    ("chip_team", 61.3, 66.0), ("cap10", 61.5, 64.0), ("cap11", 67.0, 69.5),
+BASE_OVERLAYS = [
+    ("hook", 0.4, 6.6), ("cap_riya", 8.1, 10.3),
+    ("chip_alpona", 14.6, 20.9), ("chip_writer", 32.3, 37.9),
+    ("chip_business", 48.4, 54.9), ("chip_bgremove", 55.3, 60.9), ("chip_team", 61.3, 66.0),
     ("cap_nanu", 75.9, 79.3),
 ]
+NO_CAPTION = (38.0, 48.3)  # Smart Resize / templates graphics already carry the words on screen
+TIMELINE = json.load(open(ROOT / "vo2" / "timeline.json"))
 
-VO = [("vo01", 1.0), ("vo02", 10.8), ("vo03", 15.0), ("vo04", 25.3), ("vo05", 32.4), ("vo06", 38.4),
-      ("vo07", 42.5), ("vo08", 48.6), ("vo09", 55.8), ("vo10", 61.5), ("vo11", 67.0), ("vo12", 80.6), ("vo13", 84.2)]
 
-SFX = [("whoosh", 6.8, -14), ("magic", 14.9, -10), ("whoosh", 20.8, -12), ("sparkle", 23.7, -12),
+def overlays():
+    out = list(BASE_OVERLAYS)
+    for i, x in enumerate(TIMELINE):
+        a, b = x["start"] - 0.05, x["end"] + 0.35
+        if i + 1 < len(TIMELINE):
+            b = min(b, TIMELINE[i + 1]["start"] - 0.02)
+        if NO_CAPTION[0] <= a < NO_CAPTION[1] and b <= NO_CAPTION[1] + 1:
+            continue
+        if a >= 79.4:  # the end card already shows the offer
+            continue
+        out.append((f"cap_{x['id']}", a, b))
+    return out
+
+VO_DIR = ROOT / "vo2"
+
+SFX = [("whoosh", 6.8, -14), ("chime", 12.8, -20), ("magic", 15.9, -10), ("whoosh", 20.8, -12), ("sparkle", 23.7, -12),
        ("whoosh", 37.8, -12), ("pop", 38.35, -10), ("pop", 39.05, -10), ("pop", 39.75, -10),
-       ("whoosh", 41.8, -14), ("bell", 48.2, -16), ("shutter", 56.4, -8), ("crowd", 66.0, -14),
+       ("whoosh", 41.8, -14), ("bell", 48.2, -16), ("shutter", 57.3, -8), ("crowd", 66.0, -14),
        ("whoosh", 79.2, -12), ("chime", 83.5, -10)]
 
 MUSIC = ROOT / "music_candidates" / "31.mp3"  # Mixkit "Dreaming Big" by Ahjay Stelino (Mixkit Stock Music Free License)
@@ -121,7 +135,7 @@ def build():
     cur = "base"
 
     # ---- overlays
-    for j, (name, a, b) in enumerate(OVERLAYS):
+    for j, (name, a, b) in enumerate(overlays()):
         k = inp("-loop", "1", "-framerate", "24", "-t", f"{b - a:.3f}", "-i", str(ROOT / "gfx" / "overlays" / f"{name}.png"))
         d = b - a
         fc.append(f"[{k}:v]format=rgba,fade=t=in:st=0:d=0.25:alpha=1,fade=t=out:st={d - 0.25:.3f}:d=0.25:alpha=1,"
@@ -132,9 +146,10 @@ def build():
 
     # ---- audio: voiceover
     alabels = []
-    for name, at in VO:
-        k = inp("-i", str(ROOT / "vo" / f"{name}.mp3"))
-        fc.append(f"[{k}:a]aresample=48000,aformat=channel_layouts=stereo,adelay={int(at * 1000)}:all=1,volume=1.0[{name}]")
+    for x in TIMELINE:
+        name = x["id"]
+        k = inp("-i", str(VO_DIR / x["wav"]))
+        fc.append(f"[{k}:a]aresample=48000,aformat=channel_layouts=stereo,adelay={int(x['start'] * 1000)}:all=1,volume=1.0[{name}]")
         alabels.append(name)
     fc.append(f"[{']['.join(alabels)}]amix=inputs={len(alabels)}:normalize=0,apad=whole_dur={TOTAL}[vo_mix]")
     fc.append("[vo_mix]asplit=2[vo_a][vo_sc]")
@@ -163,7 +178,7 @@ def build():
 
     # music: quiet under the hook, swells at "What if home…", dips for Nanu, resolves on the end card
     k = inp("-ss", str(MUSIC_OFFSET), "-t", str(TOTAL), "-i", str(MUSIC))
-    env = ("0.30+0.70*clip((t-9.8)/2.2,0,1)"
+    env = ("0.30+0.70*clip((t-10.2)/2.2,0,1)"
            "-0.45*clip((t-75.2)/0.8,0,1)*(1-clip((t-79.4)/0.8,0,1))")
     fc.append(f"[{k}:a]aresample=48000,aformat=channel_layouts=stereo,volume='{env}':eval=frame,volume=-9dB,"
               f"afade=t=in:d=1.5,afade=t=out:st={TOTAL - 3.5}:d=3.5[mus]")
