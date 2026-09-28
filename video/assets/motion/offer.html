@@ -1,0 +1,43 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="common.css"><style>
+.bg{position:absolute;inset:0;background:linear-gradient(125deg,#e91e63 0%,#9c27b0 45%,#1976d2 100%)}
+.glow{position:absolute;width:900px;height:900px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.35),transparent 65%)}
+.pt{position:absolute;border-radius:50%;background:#fff}
+.h{position:absolute;left:0;right:0;top:250px;text-align:center;color:#fff;font-weight:700;font-size:110px;letter-spacing:-1px;opacity:0}
+.s{position:absolute;left:0;right:0;top:410px;text-align:center;color:#ffe6f1;font-size:40px;opacity:0}
+.btns{position:absolute;left:0;right:0;top:560px;display:flex;justify-content:center;gap:40px}
+.btn{padding:30px 60px;border-radius:60px;font-weight:700;font-size:38px;opacity:0;position:relative;overflow:hidden}
+.b1{background:#fff;color:#9c27b0;box-shadow:0 20px 40px rgba(0,0,0,.2)}
+.b2{border:4px solid #fff;color:#fff}
+.rip{position:absolute;border-radius:50%;background:rgba(255,255,255,.6);width:20px;height:20px;left:50%;top:50%}
+.url{position:absolute;left:0;right:0;top:800px;text-align:center;color:#fff;font-size:34px;font-weight:600;letter-spacing:1px;opacity:0}
+.logo{position:absolute;left:50%;top:70px;height:140px;transform:translateX(-50%);opacity:0;filter:drop-shadow(0 6px 18px rgba(0,0,0,.25))}
+.logochip{position:absolute;left:50%;top:60px;width:170px;height:170px;margin-left:-85px;border-radius:40px;background:#fff;opacity:0;box-shadow:0 20px 40px rgba(0,0,0,.2)}
+</style></head><body><div class="stage"><div class="bg"></div>
+<div class="glow" id="g1" style="left:-200px;top:-300px"></div><div class="glow" id="g2" style="right:-250px;bottom:-350px"></div>
+<div id="pts"></div>
+<div class="logochip" id="lc"></div><img class="logo" id="lg" src="wishhub-logo.png" style="top:78px;height:134px">
+<div class="h" id="h">Try Wish Hub free.</div>
+<div class="s" id="s">We'll set up your first branded cards with you.</div>
+<div class="btns"><div class="btn b1" id="b1">Start Free Trial</div><div class="btn b2" id="b2">Book a Free Demo<div class="rip" id="rip"></div></div></div>
+<div class="url" id="url">wishhub.digitalhubbd.com</div>
+<div class="cursor" id="cur"></div></div>
+<script src="common.js"></script><script>
+$('#cur').innerHTML=CURSOR;
+let seed=7; const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
+const pts=[]; for(let i=0;i<70;i++){const e=document.createElement('div');e.className='pt';const r=2+rnd()*6;e.style.width=e.style.height=r+'px';$('#pts').appendChild(e);pts.push({e,x:rnd()*1920,y:rnd()*1080,v:10+rnd()*30,o:.2+rnd()*.6,ph:rnd()*6});}
+window.render=t=>{
+  cam(t,8,0.035,0,0); t=t*1.2;
+  pts.forEach(p=>{p.e.style.left=(p.x+Math.sin(t*.8+p.ph)*20)+'px';p.e.style.top=(((p.y-p.v*t)%1080)+1080)%1080+'px';p.e.style.opacity=p.o*(.6+.4*Math.sin(t*2+p.ph));});
+  $('#g1').style.transform=`translate(${Math.sin(t*.4)*60}px,${Math.cos(t*.3)*40}px)`; $('#g2').style.transform=`translate(${Math.cos(t*.35)*60}px,${Math.sin(t*.4)*40}px)`;
+  const l=P(t,.2,.6); $('#lc').style.opacity=l; $('#lg').style.opacity=l; $('#lc').style.transform=`scale(${L(.7,1,BACK(l))})`;
+  fadeUp($('#h'),t,.5,.6,40); fadeUp($('#s'),t,1.2,.6,24);
+  fadeUp($('#b1'),t,2.0,.5,40); fadeUp($('#b2'),t,2.2,.5,40);
+  const pr=t>6.2; const rp=P(t,6.2,6.9); $('#rip').style.transform=`translate(-50%,-50%) scale(${rp*40})`; $('#rip').style.opacity=pr?1-rp:0;
+  if(t>6.3){$('#b2').style.background='#fff';$('#b2').style.color='#1976d2'; if(t>7.2) $('#b2').firstChild.textContent='✓ Demo booked';$('#b2').style.transform=`scale(${1+0.04*Math.sin(P(t,6.3,6.8)*Math.PI)})`;}
+  fadeUp($('#url'),t,7.0,.6,20);
+  const b2=$('#b2').getBoundingClientRect(); const tx=b2.left+b2.width*.6, ty=b2.top+b2.height*.55;
+  const p=EIO(P(t,4.0,5.8)); const x=L(1780,tx,p), y=L(1060,ty,p);
+  $('#cur').style.left=x+'px'; $('#cur').style.top=y+'px'; $('#cur').style.opacity=P(t,3.8,4.1)*(1-P(t,8.5,9));
+  $('#cur').style.transform=`scale(${t>6.15&&t<6.3?.85:1})`;
+};
+</script></body></html>

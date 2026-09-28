@@ -1,0 +1,38 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="common.css"><style>
+#bg{position:absolute;inset:-40px;background:url(showcase_bg.jpg) center/cover}
+#veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.35),rgba(255,255,255,.15))}
+#row{position:absolute;inset:0;perspective:1600px}
+.card{position:absolute;width:270px;height:338px;border-radius:18px;overflow:hidden;box-shadow:0 30px 60px rgba(40,20,80,.28),0 3px 10px rgba(0,0,0,.12);background-size:cover}
+#grid{position:absolute;inset:0;background-color:#ffeef6;background:url(grid.png) center/cover;opacity:0}
+.title{position:absolute;left:0;right:0;top:70px;text-align:center;font-weight:700;font-size:62px;color:#2a1446;text-shadow:0 2px 20px rgba(255,255,255,.8)}
+.title span{color:var(--pink)}
+</style></head><body><div class="stage" style="background:#ffeef6">
+<div id="bg"></div><div id="veil"></div>
+<div id="row"></div><div id="grid"></div>
+<div class="title" id="t1">One platform. <span>Every celebration.</span></div>
+<div class="title" id="t2" style="opacity:0">Ready to <span>share.</span></div>
+</div>
+<script src="common.js"></script><script>
+const names=['01-work-anniversary-mike','02-birthday','06-thanksgiving','07-happy-holidays','10-diwali','11-eid-mubarak'];
+const row=$('#row'); const W=270,gap=34,x0=(1920-(6*W+5*gap))/2;
+names.forEach((n,i)=>{const d=document.createElement('div');d.className='card';d.style.backgroundImage=`url(${n}.png)`;d.style.left=(x0+i*(W+gap))+'px';d.style.top='400px';row.appendChild(d);});
+const cards=$$('.card');
+window.render=t=>{
+  $('#bg').style.transform=`scale(${1.05+0.04*t/10})`;
+  fadeUp($('#t1'),t,0.2,.6); if(t>4.9){$('#t1').style.opacity=1-P(t,4.9,5.3);}
+  cards.forEach((c,i)=>{
+    const a=0.35+i*0.32, p=EO(P(t,a,a+0.9));
+    const ry=L(95,0,p), ty=L(260,0,p)+Math.sin((t+i)*1.6)*6*p, rz=L(-8,[ -4,3,-2,4,-3,2][i],p);
+    c.style.opacity=P(t,a,a+.25);
+    c.style.transform=`translateY(${ty}px) rotateY(${ry}deg) rotateZ(${rz}deg)`;
+  });
+  // transition to full grid: cards scale toward grid, grid zooms out
+  const g=P(t,5.2,6.2);
+  $('#row').style.opacity=1-g;
+  const z=EIO(P(t,5.2,10.8));
+  $('#grid').style.opacity=EO(g);
+  $('#grid').style.transform=`translateY(${L(0,34,z)}px) scale(${L(1.45,1.0,z)})`;
+  $('#veil').style.opacity=1-g; $('#bg').style.opacity=1-P(t,6.0,7.0);
+  const p2=EO(P(t,7.4,8.0)); $('#t2').style.opacity=p2; $('#t2').style.transform=`translateY(${(1-p2)*24}px)`;
+};
+</script></body></html>
