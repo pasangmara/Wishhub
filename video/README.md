@@ -10,7 +10,7 @@ A production kit for a ~88-second B2B presentation video (plus a 30s social cut)
 | `04-voiceover.txt` | Clean narrator script for ElevenLabs / TTS |
 | `05-music-sfx-brief.md` | Music arc + timestamped SFX list + mix levels |
 | `06-edit-guide.md` | Prep checklist, timeline, style rules, exports, QA |
-| `assets/` | Rachel + Mike reference stills for Flow, the transparent Wish Hub logo, hook overlays (text + calendar/email cards), 12 US wish cards, and a 4K card grid |
+| `assets/` | Reference stills for Flow, the transparent logo, hook overlays, 12 US wish cards (+ generator), a 4K card grid, motion-graphic sources (`motion/`), and the scratch voiceover MP3s (`voiceover/`) |
 
 **Story arc:** Hook (missed moment) → Turn ("We remember it for you") → Card showcase → How it works →
 Your brand → Automation → Free trial / demo offer → Emotional close + CTA.

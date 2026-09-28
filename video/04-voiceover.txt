@@ -25,10 +25,18 @@ Pick a card. [pause] Personalize it. [pause] Schedule it once. [pause] Wish Hub 
 Your logo. Your message. Their name. [pause] Every wish carries your brand.
 
 [06 AUTOMATION, 0:55, smooth]
-Recurring events, holiday calendars, automatic delivery by email and WhatsApp, all from one simple dashboard.
+Recurring events, holiday calendars, and automatic delivery by email, SMS, and WhatsApp, all from one simple dashboard.
 
 [07 OFFER, 1:07, clear and inviting]
 Start your free trial today, or book a free demo, and we'll set up your first branded cards with you.
 
 [08 CLOSE, 1:17, warm, slower]
 Every occasion. [pause] One beautiful wish. [long pause] Wish Hub. [pause] We remember it for you.
+
+---
+SCRATCH VOICE (draft v1)
+The lines above were generated as scratch audio with OpenAI TTS (tts-1-hd, voice "nova", speed 0.95)
+through the n8n workflow "Wish Hub USA Video – Scratch Voiceover (TTS)" on your n8n cloud workspace, paid with
+n8n credits. The MP3s are in assets/voiceover/. The workflow is left UNPUBLISHED. To regenerate
+(for example with the male voice "onyx"), publish it, POST {key, text, voice, speed} to its webhook, then unpublish it again.
+For the final video, replace the scratch voice with a human or ElevenLabs narrator using this same script.

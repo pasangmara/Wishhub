@@ -20,6 +20,33 @@
 | C3 butterfly | 3.5s → 10.0s, hold the last frame 1.5s | Logo + "We Remember It For You." fade in over the particle glow |
 | C6 Rachel relaxed | 2.0s → 10.0s | **Blur/mask the Apple logo** on the laptop lid |
 | C7 Mike | 4.0s → 10.0s (2–4s optional hand insert) | none |
+| C4 cards | 1.8s → 4.0s | Only the real "Happy Holidays" moment; the rest of the showcase uses the real card PNGs |
+| C8 Laura | 4.5s → 10.0s | Email card overlay (card 05) slides in at +0.6s |
+| C9 celebration | 0.0s → 5.5s | none |
+| C10 window | 3.0s → 10.0s | Ends on white, straight into the end card |
+
+**Apple logo on C6:** `delogo=x=295:y=574:w=42:h=54` on the 1280×720 source (the laptop doesn't move, so one static box works).
+
+## 0.6 Draft v1 assembly (95.5s, 1920×1080, 24fps)
+| Start | Segment | VO |
+|---|---|---|
+| 0:00.0 | Hook (C1 + C2 + overlays) | 01 @ 0:00.6 |
+| 0:10.0 | Turn (C3 + logo reveal) | 02 @ 0:14.8 |
+| 0:18.0 | C4 Happy Holidays moment | |
+| 0:20.2 | Showcase (motion) | 03 @ 0:20.9 |
+| 0:31.0 | How it works (mockup) | 04 split per step @ 0:31.4 / 0:33.4 / 0:35.6 |
+| 0:40.0 | C6 Rachel relaxed | |
+| 0:43.0 | Your brand (motion) | 05 split @ 0:43.5 / 0:44.8 / 0:45.7 |
+| 0:49.0 | C7 Mike | |
+| 0:55.0 | Dashboard (mockup) | 06 @ 0:55.4 |
+| 1:01.5 | C8 Laura + email overlay | |
+| 1:07.0 | Offer (motion) | 07 @ 1:07.8 |
+| 1:17.0 | C9 celebration | |
+| 1:22.5 | C10 window → white | |
+| 1:29.5 | End card | 08 @ 1:30.1 |
+
+Mix: Flow ambient audio +4 dB, side-chain ducked under the VO; VO +12 dB; loudnorm to about −14 LUFS. **No music yet.**
+
 
 Ready-made assets in `assets/`: the logo (`wishhub-logo.png`, transparent), hook overlays, 12 US cards, and a 4K card grid.
 

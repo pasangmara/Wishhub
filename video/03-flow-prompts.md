@@ -8,6 +8,10 @@
 | C3 butterfly | ✅ Excellent | **3.5s → 10.0s** | The butterfly glows on the screen, flies out, circles, bursts into particles and ends on warm bokeh, a perfect bed for the logo reveal. |
 | C6 Rachel relaxed | ✅ Keep | **2.0s → 10.0s** | Matches the Rachel reference. She smiles, types, and sips coffee at the end. ⚠️ **An Apple logo is visible on the laptop lid**, so blur/mask it in the edit (the camera is locked off, so a static blur works). |
 | C7 Mike | ✅ Keep (hero) | **4.0s → 10.0s** | The phone lights up, he picks it up, a genuine smile, a coworker pats his shoulder, he laughs. 2–4s is a tight insert on the hands and phone (optional cutaway). |
+| C4 floating cards | ⚠️ Partial | **1.8s → 4.0s** + blurred still as a background plate | Flow used our Happy Holidays card but **invented** the Thanksgiving and Work Anniversary designs, and garbled the small text. The showcase is animated from the real card PNGs instead (`assets/motion/showcase.html`). |
+| C8 Laura | ✅ Keep | **4.5s → 10.0s** | Hand on heart. The lid shows a generic dot, not a brand logo. An email notification with card 05 is overlaid. |
+| C9 celebration | ✅ Excellent | **0.0s → 5.5s** | Rachel and Mike both match their references. (7.5–10s: Mike blowing out the candle is a nice alternate.) |
+| C10 Rachel window | ✅ Excellent | **3.0s → 10.0s** | Fades to white by itself, a perfect handoff to the end card. |
 
 **Lessons applied to the prompts below:**
 - Rachel's look is now locked to the C2 version: **wavy dark brown hair just past the shoulders, gold hoop earrings**. Upload the still `rachel-reference.png` (C2 at 1.2s) as the reference/ingredient for C6, C9 and C10.

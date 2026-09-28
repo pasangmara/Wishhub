@@ -1,7 +1,7 @@
 # Wish Hub: USA B2B Video Script & Storyboard
 
 **Format:** 16:9 master, 1080p or 4K · **Length:** ~88s · **Audience:** US businesses (HR, agencies, account teams)
-**Offer:** Free trial / free demo · **Channels shown:** Email, WhatsApp, shareable link
+**Offer:** Free trial / free demo · **Channels shown:** Email, SMS, WhatsApp (as listed on wishhub.digitalhubbd.com)
 **Tone:** warm, premium, human. Think Apple-meets-Slack, not a loud infomercial.
 
 ## Story in one line
@@ -73,7 +73,7 @@ cards go out automatically (value). Try it free (offer). The team and clients fe
 |---|---|
 | **Visual** | Real dashboard screen recording (upcoming events, calendar). Feature chips animate in: **Smart Scheduling · Recurring Events · Holiday Calendars · Email + WhatsApp Delivery · Dashboard.** Cut to clip C8: Laura in her home office opens an email with a branded "Thank you for 10 years" card, then smiles and touches her heart. |
 | **On-screen text** | *Set it once. It runs every year.* |
-| **VO** | "Recurring events, holiday calendars, automatic delivery by email and WhatsApp, all from one simple dashboard." |
+| **VO** | "Recurring events, holiday calendars, and automatic delivery by email, SMS, and WhatsApp, all from one simple dashboard." |
 | **Music** | Builds toward the climax. |
 | **SFX** | Chip "pops", calendar page-flip, email "ding". |
 

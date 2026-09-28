@@ -1,0 +1,20 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="common.css"><style>
+.bg{position:absolute;inset:0;background:radial-gradient(circle at 50% 42%,#ffffff 0%,#fff4f9 45%,#eef4ff 100%)}
+.logo{position:absolute;left:50%;top:150px;height:360px;transform:translateX(-50%);opacity:0}
+.tag{position:absolute;left:0;right:0;top:560px;text-align:center;font-family:Cinzel;font-size:66px;color:var(--navy);opacity:0}
+.cta{position:absolute;left:0;right:0;top:720px;display:flex;justify-content:center;gap:28px;align-items:center;opacity:0}
+.url{font-size:36px;font-weight:600;color:var(--ink)}
+.pill{padding:20px 44px;border-radius:50px;background:linear-gradient(90deg,#e91e63,#1976d2);color:#fff;font-weight:700;font-size:34px;box-shadow:0 16px 30px rgba(120,30,120,.25)}
+.fade{position:absolute;inset:0;background:#fff}
+</style></head><body><div class="stage"><div class="bg"></div>
+<img class="logo" id="lg" src="wishhub-logo.png">
+<div class="tag" id="tg">Every Occasion. One Beautiful Wish.</div>
+<div class="cta" id="cta"><span class="url">wishhub.digitalhubbd.com</span><span class="pill">Book your free demo →</span></div>
+<div class="fade" id="fd"></div></div>
+<script src="common.js"></script><script>
+window.render=t=>{
+  $('#fd').style.opacity=1-P(t,0,.4);
+  const l=P(t,.2,.9); $('#lg').style.opacity=l; $('#lg').style.transform=`translateX(-50%) scale(${L(.85,1,EO(l))})`;
+  fadeUp($('#tg'),t,1.0,.7,24); fadeUp($('#cta'),t,1.8,.6,24);
+};
+</script></body></html>
