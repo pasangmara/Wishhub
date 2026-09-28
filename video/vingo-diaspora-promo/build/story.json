@@ -1,0 +1,168 @@
+{
+  "voice": "English_radiant_girl",
+  "note": "Narrated by Riya in first person. 'at' = earliest start (scene anchor); lines without 'at' follow the previous line. 'say' is what the TTS reads, 'cap' is the on-screen caption.",
+  "reserved": [
+    [
+      8.1,
+      10.2,
+      "Riya on camera: Ammu, let's make the Eid card this year."
+    ],
+    [
+      75.5,
+      79.5,
+      "Nanu: Mashallah, ki sundor!"
+    ]
+  ],
+  "lines": [
+    {
+      "id": "n01",
+      "at": 0.9,
+      "emotion": "sad",
+      "say": "Every Eid, Ammu scrolls through old photos from Dhaka.",
+      "cap": "Every Eid, Ammu scrolls through old photos from Dhaka.",
+      "speed": 1.08
+    },
+    {
+      "id": "n02",
+      "emotion": "sad",
+      "say": "Here in New York, Eid feels so far from home.",
+      "cap": "Here in New York, Eid feels so far from home.",
+      "speed": 1.05
+    },
+    {
+      "id": "n03",
+      "at": 10.5,
+      "emotion": "happy",
+      "say": "So this year, we made the card for Nanu. Together.",
+      "cap": "So this year, we made the card for Nanu. Together."
+    },
+    {
+      "id": "n04",
+      "at": 14.2,
+      "emotion": "happy",
+      "say": "I opened Vingo, tapped Magic Alpona...",
+      "cap": "I opened Vingo, tapped Magic Alpona…"
+    },
+    {
+      "id": "n05",
+      "emotion": "happy",
+      "say": "and our family photo was wrapped in real Bangladeshi art.",
+      "cap": "…and our family photo was wrapped in real Bangladeshi art."
+    },
+    {
+      "id": "n06",
+      "at": 21.1,
+      "emotion": "happy",
+      "say": "No design skills needed. Just vingo B D dot com.",
+      "cap": "No design skills needed. Just vingobd.com.",
+      "speed": 1.08
+    },
+    {
+      "id": "n07",
+      "at": 25.2,
+      "emotion": "calm",
+      "say": "Nokshi Kantha, alpona, Jamdani, rickshaw colors...",
+      "cap": "Nakshi Kantha, alpona, Jamdani, rickshaw colors…",
+      "speed": 1.1
+    },
+    {
+      "id": "n08",
+      "emotion": "calm",
+      "say": "the patterns Ammu grew up with, now in every design.",
+      "cap": "…the patterns Ammu grew up with, now in every design.",
+      "speed": 1.1
+    },
+    {
+      "id": "n09",
+      "at": 32.1,
+      "emotion": "calm",
+      "say": "My Bangla isn't perfect, so Vingo's AI wrote the words with me.",
+      "cap": "My Bangla isn’t perfect, so Vingo’s AI wrote the words with me.",
+      "speed": 1.1
+    },
+    {
+      "id": "n10",
+      "emotion": "happy",
+      "say": "Ammu read them twice... and smiled.",
+      "cap": "Ammu read them twice… and smiled.",
+      "speed": 1.05
+    },
+    {
+      "id": "n11",
+      "at": 38.2,
+      "emotion": "happy",
+      "say": "One design... every size. Ready to share.",
+      "cap": "One design… every size. Ready to share.",
+      "speed": 1.05
+    },
+    {
+      "id": "n12",
+      "at": 42.2,
+      "emotion": "happy",
+      "say": "Over ten thousand templates. Eid, Boishakh, weddings, Puja...",
+      "cap": "Over 10,000 templates. Eid, Boishakh, weddings, Puja…",
+      "speed": 1.1
+    },
+    {
+      "id": "n13",
+      "emotion": "happy",
+      "say": "every day that matters to us.",
+      "cap": "…every day that matters to us.",
+      "speed": 1.05
+    },
+    {
+      "id": "n14",
+      "at": 48.3,
+      "emotion": "happy",
+      "say": "Even Abbu uses it now, for his shop's Eid sale posters.",
+      "cap": "Even Abbu uses it now, for his shop’s Eid sale posters."
+    },
+    {
+      "id": "n15",
+      "at": 55.2,
+      "emotion": "happy",
+      "say": "A photo of his mangoes? One tap, and the background is gone.",
+      "cap": "A photo of his mangoes? One tap, and the background is gone."
+    },
+    {
+      "id": "n16",
+      "at": 61.1,
+      "emotion": "happy",
+      "say": "Our whole community plans the Boishakhi Mela on it, together...",
+      "cap": "Our whole community plans the Boishakhi Mela on it, together…"
+    },
+    {
+      "id": "n17",
+      "at": 66.2,
+      "emotion": "happy",
+      "say": "from Queens, to Detroit, to Dallas.",
+      "cap": "…from Queens, to Detroit, to Dallas."
+    },
+    {
+      "id": "n18",
+      "emotion": "calm",
+      "say": "Wherever we go, our culture comes with us.",
+      "cap": "Wherever we go, our culture comes with us."
+    },
+    {
+      "id": "n19",
+      "at": 73.0,
+      "emotion": "happy",
+      "say": "Then... we called Nanu.",
+      "cap": "Then… we called Nanu."
+    },
+    {
+      "id": "n20",
+      "at": 79.9,
+      "emotion": "calm",
+      "say": "This is Vingo. Your culture, designed in minutes.",
+      "cap": "This is Vingo. Your culture, designed in minutes."
+    },
+    {
+      "id": "n21",
+      "emotion": "happy",
+      "say": "Start free today. No credit card needed. Just visit vingo B D dot com.",
+      "cap": "Start free today. No credit card needed. Just visit vingobd.com."
+    }
+  ]
+}
