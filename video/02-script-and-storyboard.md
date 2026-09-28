@@ -21,6 +21,11 @@ cards go out automatically (value). Try it free (offer). The team and clients fe
 
 ---
 
+## Current cut (draft v2): story order
+Hook (missed) → butterfly "second chance" → one platform, every celebration → Rachel sets up Mike's card → it carries your brand →
+**Mike gets it on time** → the team celebrates → the dashboard runs the whole year → **Laura gets her thank-you** → "No more missed moments." → offer → end card.
+The emotional payoffs come *before* the offer, so the ask lands after the viewer has felt the value. (The scene tables below are the original plan. See `06-edit-guide.md` §0.7 for the exact v2 timings.)
+
 ## SCENE-BY-SCENE
 
 ### 1) HOOK: "The Missed Moment" · 0:00–0:10

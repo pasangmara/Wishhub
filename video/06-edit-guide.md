@@ -27,6 +27,33 @@
 
 **Apple logo on C6:** `delogo=x=295:y=574:w=42:h=54` on the 1280×720 source (the laptop doesn't move, so one static box works).
 
+## 0.7 Draft v2 assembly (current, 84.3s): story and flow fixes
+**What changed from v1:** no frozen frames anywhere (`freezedetect` finds none). Before, the butterfly scene froze for 1.5s and the mockups held still for up to 2.3s.
+Every scene change is now a 0.3–0.6s crossfade. The motion screens have a slow camera push and drifting light. C4 (the Flow clip with invented cards) is removed,
+and a soft pad under everything stops the sound from jumping between silence and noise.
+
+**Story arc:** *miss → second chance → set it up → it lands → the whole business runs on it → the payoff → offer.*
+The butterfly is the "second chance": the same two moments from the hook (Mike's anniversary, Laura's 10 years) now land **on time**,
+and the Delivered card on C7 mirrors the Missed card in the hook.
+
+| Start | Segment | In | VO |
+|---|---|---|---|
+| 0:00.0 | Hook: C1 + C2, Missed card + Laura's email | — | 01 |
+| 0:09.7 | Turn: C3 butterfly (end slowed 1.5×) → logo + "We Remember It For You." + chime | fade | 02 |
+| 0:16.6 | Showcase: real cards → grid | fade + whoosh | 03 |
+| 0:26.9 | How it works: schedule Mike's card for Sep 26 (mockup) | fade + whoosh | 04 split per step |
+| 0:34.5 | C6 Rachel relaxed (Apple logo removed) | fade | — |
+| 0:37.1 | Your brand: Mike's card builds up | fade | 05 split per line |
+| 0:41.7 | C7 Mike + **Delivered · On time ✓** card | fade | — |
+| 0:47.3 | C9 team celebration | fade | — |
+| 0:52.3 | Dashboard: Mike delivered, Laura next, holidays ahead | fade + whoosh | 06 |
+| 0:59.9 | C8 Laura + her thank-you email | fade | — |
+| 1:05.0 | C10 Rachel + "No more missed moments." | fade | — |
+| 1:10.9 | Offer: free trial / demo, demo gets booked | fade to white + whoosh | 07 |
+| 1:18.3 | End card | fade | 08 |
+
+Sources: `assets/motion/`, `assets/story-overlays/`, `assets/build/`.
+
 ## 0.6 Draft v1 assembly (95.5s, 1920×1080, 24fps)
 | Start | Segment | VO |
 |---|---|---|

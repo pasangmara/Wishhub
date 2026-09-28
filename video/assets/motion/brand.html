@@ -4,17 +4,21 @@
 .reg{position:absolute;inset:0;background:url(01-work-anniversary-mike.png) center/cover}
 .lines{position:absolute;left:1080px;top:330px;display:flex;flex-direction:column;gap:18px;font-weight:700;font-size:78px;line-height:1.1}
 .lines div{opacity:0} .lines .pk{color:var(--pink)} .lines .bl{color:var(--blue)} .lines .nv{color:var(--navy)}
+.shine{position:absolute;top:-20%;bottom:-20%;width:180px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-18deg);left:-300px;z-index:5}
 .sub{position:absolute;left:1084px;top:700px;font-size:30px;color:var(--muted);opacity:0}
 </style></head><body><div class="stage pastel">
 <div class="cardbox" id="cb"><div class="blank"></div>
-<div class="reg" id="rLogo"></div><div class="reg" id="rNum"></div><div class="reg" id="rName"></div><div class="reg" id="rMsg"></div><div class="reg" id="rAll"></div></div>
+<div class="reg" id="rLogo"></div><div class="reg" id="rNum"></div><div class="reg" id="rName"></div><div class="reg" id="rMsg"></div><div class="reg" id="rAll"></div><div class="shine" id="sh"></div></div>
 <div class="lines"><div class="pk" id="l1">Your logo.</div><div class="bl" id="l2">Your message.</div><div class="nv" id="l3">Their name.</div></div>
 <div class="sub" id="sub">Every wish carries your brand.</div>
 </div><script src="common.js"></script><script>
 // regions in card px (1080x1350): logo 40-130, number 170-720, name 700-900, message 900-1260
 const H=1350, clip=(a,b)=>`inset(${a/H*100}% 0 ${100-b/H*100}% 0)`;
+const bl=blobs(5,5);
 window.render=t=>{
-  const cb=EO(P(t,0,.5)); $('#cb').style.opacity=cb; $('#cb').style.transform=`translateY(${(1-cb)*40}px) rotate(${(1-cb)*-3}deg)`;
+  cam(t,5,0.04,-20,0); bl(t); t=t*1.12;
+  const cb=EO(P(t,0,.5)); $('#cb').style.opacity=cb; $('#cb').style.transform=`perspective(1600px) translateY(${(1-cb)*40+Math.sin(t*1.8)*6}px) rotate(${(1-cb)*-3}deg) rotateY(${Math.sin(t*1.2)*4}deg)`;
+  $('#sh').style.left=L(-300,900,EIO(P(t,3.9,4.7)))+'px';
   const lg=P(t,.5,.8); $('#rLogo').style.clipPath=clip(40,135); $('#rLogo').style.opacity=lg; $('#rLogo').style.transform=`scale(${L(1.25,1,BACK(lg))})`;
   $('#rNum').style.clipPath=clip(165,720); $('#rNum').style.opacity=P(t,1.2,1.6);
   const nm=P(t,1.8,3.0); $('#rName').style.clipPath=`inset(${700/H*100}% ${100-nm*100}% ${100-900/H*100}% 0)`;

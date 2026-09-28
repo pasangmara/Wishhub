@@ -18,27 +18,34 @@ h3{font-size:30px;font-weight:700;margin-bottom:16px}
 </style></head><body><div class="stage pastel">
 <div class="headline" id="hl">Set it once. <span style="color:var(--pink)">It runs every year.</span></div>
 <div class="window" id="win"><div class="topbar"><img src="wishhub-logo.png"><div class="nav"><b>Dashboard</b><span>Card Library</span><span>Schedule</span><span>Contacts</span></div><div class="avatar"><i></i>Rachel · Summit &amp; Co.</div></div>
-<div class="main"><div class="col"><h3>Upcoming wishes</h3><div id="list"></div></div>
+<div class="main"><div class="col"><h3>Upcoming wishes</h3><div style="height:560px;overflow:hidden;position:relative"><div id="list"></div></div></div>
 <div class="col2"><h3>This year</h3>
 <div class="stat" id="st1" style="background:linear-gradient(135deg,#e91e63,#ff6f91)"><b id="n1">0</b><span>wishes scheduled</span></div>
 <div class="stat" id="st2" style="background:linear-gradient(135deg,#1976d2,#42a5f5)"><b>0</b><span>moments missed</span></div>
 <div class="stat" id="st3" style="background:linear-gradient(135deg,#1a237e,#3949ab)"><b>6</b><span>holiday calendars active</span></div></div></div></div>
 <div class="chipsbar" id="chips"></div>
 </div><script src="common.js"></script><script>
-const ev=[['OCT','14','05-client-thank-you-10-years','Laura Bennett · Brightline Co.','10 Years Together · Client','Email'],
+const ev=[['SEP','26','01-work-anniversary-mike','Mike Johnson','5-Year Work Anniversary','Email + SMS'],
+['SEP','27','05-client-thank-you-10-years','Laura Bennett · Brightline Co.','10 Years Together · Client','Email'],
 ['OCT','21','02-birthday','Jessica Lee','Birthday · repeats yearly','SMS'],
 ['NOV','1','10-diwali','Diwali greetings','48 team members & clients','WhatsApp'],
 ['NOV','26','06-thanksgiving','Happy Thanksgiving','All clients · 212 recipients','Email'],
-['DEC','15','07-happy-holidays','Happy Holidays','Everyone · 260 recipients','Email + SMS']];
+['DEC','15','07-happy-holidays','Happy Holidays','Everyone · 260 recipients','Email + SMS'],
+['DEC','31','08-happy-new-year','Happy New Year','All clients · 212 recipients','Email'],
+['FEB','17','12-lunar-new-year','Lunar New Year','Team & partners · 64 recipients','WhatsApp']];
 ev.forEach(e=>{const d=document.createElement('div');d.className='ev';d.innerHTML=`<div class="date">${e[0]}<b>${e[1]}</b></div><div class="th" style="background-image:url(${e[2]}.png)"></div><div class="who"><b>${e[3]}</b><span>${e[4]}</span></div><span class="tag">${e[5]}</span><span class="st">● Scheduled</span>`;$('#list').appendChild(d);});
 const chips=[['Smart Scheduling','#e91e63'],['Recurring Events','#ff9800'],['Holiday Calendars','#19c38a'],['Email','#1976d2'],['SMS','#7c4dff'],['WhatsApp','#25d366']];
 chips.forEach(c=>{const s=document.createElement('span');s.className='chip';s.innerHTML=`<i style="background:${c[1]}"></i>${c[0]}`;$('#chips').appendChild(s);});
+const bl=blobs(5,9);
 window.render=t=>{
+  cam(t,8,0.03,0,6); bl(t);
   fadeUp($('#hl'),t,.1,.5,20);
   const w=EO(P(t,0,.45)); $('#win').style.opacity=w; $('#win').style.transform=`translateY(${(1-w)*40}px)`;
-  $$('.ev').forEach((e,i)=>fadeUp(e,t,.5+i*.22,.4,24));
+  $$('.ev').forEach((e,i)=>{ if(i<6) fadeUp(e,t,.5+i*.18,.4,24); else e.style.opacity=P(t,4.6,5.2); });
+  const first=$$('.ev')[0].querySelector('.st'); if(t>2.2){first.textContent='✓ Delivered 9:00 AM';first.style.color='#12a36b';} $$('.ev')[0].style.background=t>2.2?`rgba(25,195,138,${.10*EO(P(t,2.2,2.6))})`:'';
+  $('#list').style.transform=`translateY(${-190*EIO(P(t,4.6,7.6))}px)`;
   ['#st1','#st2','#st3'].forEach((s,i)=>fadeUp($(s),t,.8+i*.25,.4,20));
-  $('#n1').textContent=Math.round(128*EO(P(t,.9,2.4)));
+  $('#n1').textContent=Math.round(128*EO(P(t,.9,2.4)))+Math.floor(P(t,4,8)*6);
   $$('.chipsbar .chip').forEach((c,i)=>{const p=P(t,2.6+i*.28,2.95+i*.28); c.style.opacity=p; c.style.transform=`scale(${L(.6,1,BACK(p))})`;});
 };
 </script></body></html>
