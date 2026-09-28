@@ -1,5 +1,7 @@
 # Google Flow (Veo) prompts: Vingo diaspora promo
 
+> **Primary workflow is now `flow-image-to-video.md`** (image first, then video, 90s, including shot 8b). This file is the text-to-video fallback.
+
 How to use:
 1. In Flow, create the **Ingredients** below first (generate or upload a reference image for each). Then add the matching Ingredients to every shot that lists them.
 2. Paste each shot prompt as-is. Every shot is 8 seconds, 16:9, and keeps its subject centered so it can be reframed to 9:16.

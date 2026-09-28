@@ -7,9 +7,9 @@
   - 0–8s: silence or a single sustained esraj note under the city ambience (shot 1 should feel quiet and lonely)
   - 8–10s: a soft riser, then the **beat drop on the laptop opening** (shot 2)
   - 10–48s: a driving mid-energy groove under the feature shots
-  - 48–72s: **peak**, with full dhol, claps and chorus "aah" vocals (template montage, mela)
-  - 72–76s: pull back to strings and piano only, under NANU's emotional reaction
-  - 76–80s: a warm resolve and final chord on the logo
+  - 48–80s: **peak**, with full dhol, claps and chorus "aah" vocals (template montage, shop, mela)
+  - 80–86s: pull back to strings and piano only, under NANU's emotional reaction
+  - 86–90s: a warm resolve and final chord on the logo
 - **Where to find it:** Artlist, Epidemic Sound or Musicbed. Search "Bengali fusion", "South Asian cinematic", "Bollywood uplifting" or "dhol celebration". If a budget exists, commission a composer and put the hero line "আজ কী ডিজাইন করবেন?" into a sung hook.
 - **Licensing:** make sure the licence covers paid social ads in the USA.
 
@@ -25,9 +25,10 @@
 | 0:41 | 6 | **4 × UI "pop"** on the beat, one per format |
 | 0:49 | 7 | Counter ticks up to 10,000+, a dhak hit on each cut |
 | 0:57 | 8 | Shop door bell, register beep, tape rip for the poster |
-| 1:05 | 9 | Chatter and laughter, then a festival crowd cheer swell |
-| 1:13 | 10 | Video-call connect tone, NANU's laugh |
-| 1:17 | End | Soft bell or chime on the logo reveal |
+| 1:05 | 8b | Camera shutter click, then a soft **"swoosh"** as the background clears |
+| 1:13 | 9 | Chatter and laughter, then a festival crowd cheer swell |
+| 1:21 | 10 | Video-call connect tone, NANU's laugh |
+| 1:26 | End | Soft bell or chime on the logo reveal |
 
 ## Mix levels (targets)
 - VO: peaks −6 dBFS; everything else ducks under it
