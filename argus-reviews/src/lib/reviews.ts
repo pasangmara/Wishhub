@@ -7,7 +7,8 @@ import { findActiveBusinessBySlug, positiveThreshold } from "./business";
 import { verifyPhotoToken } from "./tokens";
 import type { PublicReviewInput } from "./validation";
 
-export const RATE_LIMIT_PER_HOUR = 8;
+/** Max reviews per hour from one (hashed) IP per business. Shared Wi-Fi friendly by default. */
+export const RATE_LIMIT_PER_HOUR = Number(process.env.REVIEW_RATE_LIMIT_PER_HOUR) || 8;
 
 export type CreateReviewResult =
   | {
