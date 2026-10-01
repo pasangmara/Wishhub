@@ -25,7 +25,7 @@ export function ReviewPageView({ business, children, embedded = false }: Props) 
   return (
     <div
       style={style}
-      className={`relative isolate overflow-hidden bg-paper ${embedded ? "min-h-full" : "min-h-dvh"}`}
+      className={`@container relative isolate overflow-hidden bg-paper ${embedded ? "min-h-full" : "min-h-dvh"}`}
     >
       {/* Subtle decorative shapes — static, no animation cost */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
@@ -43,8 +43,8 @@ export function ReviewPageView({ business, children, embedded = false }: Props) 
       </div>
 
       {business.cover_image_url ? (
-        <div className="mx-auto max-w-xl px-0 sm:px-4 sm:pt-4">
-          <div className="relative h-40 overflow-hidden sm:h-48 sm:rounded-3xl">
+        <div className="mx-auto max-w-xl px-0 @xl:px-4 @xl:pt-4">
+          <div className="relative h-40 overflow-hidden @xl:h-48 @xl:rounded-3xl">
             <img
               src={business.cover_image_url}
               alt=""
@@ -58,8 +58,8 @@ export function ReviewPageView({ business, children, embedded = false }: Props) 
       ) : null}
 
       <main
-        className={`mx-auto flex w-full max-w-xl flex-col px-4 pb-10 sm:px-6 ${
-          business.cover_image_url ? "-mt-11" : "pt-10 sm:pt-14"
+        className={`mx-auto flex w-full max-w-xl flex-col px-4 pb-10 @xl:px-6 ${
+          business.cover_image_url ? "-mt-11" : "pt-10 @xl:pt-14"
         }`}
       >
         <header className="flex flex-col items-center text-center">
@@ -86,7 +86,7 @@ export function ReviewPageView({ business, children, embedded = false }: Props) 
           <p className="mt-4 text-[13px] font-semibold uppercase tracking-[0.14em]" style={{ color: brand }}>
             {business.name}
           </p>
-          <h1 className="mt-2 font-display text-[28px] font-semibold leading-[1.15] tracking-tight text-ink-900 sm:text-[34px]">
+          <h1 className="mt-2 font-display text-[28px] font-semibold leading-[1.15] tracking-tight text-ink-900 @xl:text-[34px]">
             {business.headline}
           </h1>
           <p className="mt-2.5 max-w-sm text-[15px] leading-relaxed text-ink-500">{business.description}</p>

@@ -83,7 +83,7 @@ function StarRow({
     <div
       role="radiogroup"
       aria-label={label}
-      className={`flex items-center ${big ? "justify-center gap-1 sm:gap-2" : "gap-0.5"}`}
+      className={`flex items-center ${big ? "justify-center gap-1 @xl:gap-2" : "gap-0.5"}`}
       onMouseLeave={() => setHover(0)}
     >
       {[1, 2, 3, 4, 5].map((n) => (
@@ -97,12 +97,12 @@ function StarRow({
           onClick={() => onChange(n)}
           onMouseEnter={() => setHover(n)}
           className={`group flex items-center justify-center rounded-full outline-none transition-transform focus-visible:ring-2 focus-visible:ring-[var(--brand)] focus-visible:ring-offset-2 active:scale-90 ${
-            big ? "h-14 w-14 sm:h-16 sm:w-16" : "h-10 w-10"
+            big ? "h-14 w-14 @xl:h-16 @xl:w-16" : "h-10 w-10"
           }`}
         >
           <StarIcon
             filled={n <= shown}
-            className={`${big ? "h-11 w-11 sm:h-12 sm:w-12" : "h-7 w-7"} transition-transform duration-150 ${
+            className={`${big ? "h-11 w-11 @xl:h-12 @xl:w-12" : "h-7 w-7"} transition-transform duration-150 ${
               n <= value ? "animate-pop" : ""
             } ${n <= shown ? "scale-100" : "scale-95"}`}
           />
@@ -268,7 +268,7 @@ export function ReviewForm({ business, preview = false }: Props) {
       <div
         ref={resultRef}
         tabIndex={-1}
-        className="animate-fade-up rounded-[28px] border border-line bg-white px-6 py-10 text-center shadow-lift outline-none sm:px-10"
+        className="animate-fade-up rounded-[28px] border border-line bg-white px-6 py-10 text-center shadow-lift outline-none @xl:px-10"
         role="status"
         aria-live="polite"
       >
@@ -334,7 +334,7 @@ export function ReviewForm({ business, preview = false }: Props) {
     <form
       onSubmit={onSubmit}
       noValidate
-      className="animate-fade-up rounded-[28px] border border-line bg-white p-5 shadow-lift sm:p-8"
+      className="animate-fade-up rounded-[28px] border border-line bg-white p-5 shadow-lift @xl:p-8"
       aria-busy={submitting}
     >
       {/* Rating */}
@@ -401,7 +401,7 @@ export function ReviewForm({ business, preview = false }: Props) {
           <p className="mb-2 text-sm font-medium text-ink-500">
             {business.form.service_label} <span className="text-ink-400">(optional)</span>
           </p>
-          <div className="no-scrollbar -mx-5 flex gap-2 overflow-x-auto px-5 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0">
+          <div className="no-scrollbar -mx-5 flex gap-2 overflow-x-auto px-5 pb-1 @xl:mx-0 @xl:flex-wrap @xl:overflow-visible @xl:px-0">
             {business.form.service_options.map((opt) => {
               const active = service === opt;
               return (
@@ -424,7 +424,7 @@ export function ReviewForm({ business, preview = false }: Props) {
       ) : null}
 
       {/* Optional contact */}
-      <div className="mt-6 grid gap-4 sm:grid-cols-2">
+      <div className="mt-6 grid gap-4 @xl:grid-cols-2">
         <div>
           <label htmlFor={`${ids}-name`} className="mb-2 block text-sm font-semibold text-ink-900">
             Your name <span className="font-normal text-ink-400">(optional)</span>
