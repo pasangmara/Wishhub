@@ -172,6 +172,6 @@ Databases for tests: `TEST_DATABASE_URL` (default `postgres://argus:argus@localh
 ## Deploying
 
 1. Create a Postgres database (a Supabase project works: use its connection string, and set `DATABASE_PREPARE=false` if you use the pooler).
-2. Set the env vars above. On serverless hosts (e.g. Vercel), use `STORAGE_DRIVER=s3` because local disk isn't persistent.
-3. Run `npm run db:migrate`, then `npm run admin:create` (or `db:seed` for the demo).
-4. If you deploy on Vercel, set **Root Directory** to `argus-reviews`. Point `review.argusofficial.com` at the deployment.
+2. Import the repo in Vercel, set **Root Directory** to `argus-reviews`, and add the env vars above (`DATABASE_URL`, `AUTH_SECRET`, `NEXT_PUBLIC_APP_URL`, `ADMIN_EMAIL`, `ADMIN_PASSWORD`). Use `STORAGE_DRIVER=s3` for photo uploads, since serverless disk isn't persistent.
+3. Deploy. Vercel runs `npm run vercel-build`, which applies migrations, seeds the demo business and your admin (idempotent: existing data and passwords are left alone), then builds.
+4. Add `review.argusofficial.com` under Project → Settings → Domains and create the CNAME record Vercel shows (`review` → `cname.vercel-dns.com`).
