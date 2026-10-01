@@ -1,0 +1,1 @@
+export default function Home() { return <main className="p-10">ARGUS</main>; }
